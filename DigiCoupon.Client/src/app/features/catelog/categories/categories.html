@@ -1,0 +1,95 @@
+<p-toolbar styleClass="">
+    <ng-template #start>
+        <div class="font-semibold text-xl">Category management</div>
+    </ng-template>
+    <ng-template #end>
+        <p-inputgroup>
+            <input pInputText placeholder="Search..." (input)="onSearch($event)" />
+        </p-inputgroup>
+    </ng-template>
+</p-toolbar>
+
+<div class="card">
+    <div class="row">
+        <div class="col-md-6 md:w-1/2">
+            <form (ngSubmit)="saveCategory()">
+                <div class="card flex flex-col gap-4">
+                    <div class="grid grid-cols-12 grid-cols-12 gap-2">
+                        <label for="name3" class="flex items-center col-span-12 mb-2 md:col-span-2 md:mb-0">Name</label>
+                        <div class="col-span-12 md:col-span-10">
+                            <input pInputText class="w-100" id="name3" type="text" [formField]="categoryForm.name" />
+                        </div>
+                    </div>
+                    <div class="grid grid-cols-12 grid-cols-12 gap-2">
+                        <label for="email3" class="flex items-center col-span-12 mb-2 md:col-span-2 md:mb-0">Parent
+                            category</label>
+                        <div class="col-span-12 md:col-span-10">
+                            <p-select [options]="parentCategories()" class="w-100" optionLabel="name" optionValue="code"
+                                placeholder="Select category" [ngModel]="categoryModel().parentId" name="parentId"
+                                (ngModelChange)="categoryModel.update(x => ({...x,parentId: $event}))">
+                            </p-select>
+                        </div>
+                    </div>
+
+                    <p-button label="Save" icon="pi pi-check" type="submit" class="mt-3 justify-items-end"
+                        [disabled]="categoryForm().invalid()">
+                    </p-button>
+
+                </div>
+            </form>
+        </div>
+        <div class="col-md-6">
+            <p-table #dt1 [value]="categories()" dataKey="id" [rows]="10" [loading]="loading" [rowHover]="true"
+                [rowsPerPageOptions]="[10, 20, 50, 100]" [showGridlines]="true" [paginator]="true"
+                [totalRecords]="totalRecords" [lazy]="true" (onLazyLoad)="getCategories($event)"
+                [globalFilterFields]="['name', 'parentName']" (onSort)="onSort($event)" responsiveLayout="scroll">
+                <ng-template #header>
+                    <tr>
+                        <th pSortableColumn="name">
+                            Category
+                            <p-sortIcon field="name"></p-sortIcon>
+                        </th>
+                        <th pSortableColumn="paretnName">
+                            Parent category
+                            <p-sortIcon field="paretnName"></p-sortIcon>
+                        </th>
+                        <th style="width:150px">
+                            Action
+                        </th>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="body" let-category>
+                    <tr>
+                        <td>{{ category.name }}</td>
+                        <td>{{ category.parentName }}</td>
+                        <td>
+                            <p-button icon="pi pi-pencil" severity="info" [rounded]="true" [text]="true"
+                                [title]="category.id" (onClick)="editCategory(category)">
+                            </p-button>
+
+                            <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [text]="true"
+                                (onClick)="deleteCategory(category)">
+                            </p-button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td colspan="3" class="text-center">
+                            No categories found.
+                        </td>
+                    </tr>
+                </ng-template>
+            </p-table>
+        </div>
+    </div>
+</div>
+
+<p-dialog header="Add Category" [(visible)]="showCategory" [modal]="true">
+
+    <ng-template #footer>
+        <p-button label="Save" icon="pi pi-check" type="submit" class="mt-3 w-100 text-end"
+            [disabled]="categoryForm().invalid()">
+        </p-button>
+    </ng-template>
+</p-dialog>

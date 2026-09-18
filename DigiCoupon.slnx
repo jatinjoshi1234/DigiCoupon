@@ -1,0 +1,9 @@
+<Solution>
+  <Folder Name="/Solution Items/">
+    <File Path="README.md" />
+  </Folder>
+  <Project Path="DigiCoupon.Application/DigiCoupon.Application.csproj" />
+  <Project Path="DigiCoupon.Domain/DigiCoupon.Domain.csproj" />
+  <Project Path="DigiCoupon.Infrastructure/DigiCoupon.Infrastructure.csproj" />
+  <Project Path="DigiCoupon.Server/DigiCoupon.Server.csproj" />
+</Solution>

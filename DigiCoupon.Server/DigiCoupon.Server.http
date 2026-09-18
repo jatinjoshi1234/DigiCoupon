@@ -1,0 +1,135 @@
+@DigiCoupon.Server_HostAddress = https://localhost:7181/api
+@DigiCoupon.Register = /auth/register
+@DigiCoupon.Login = /auth/login
+@DigiCoupon.Restuarant = /restuarant
+@DigiCoupon.Branch = /restuarant/branch
+@DigiCoupon.AllBranch = /restuarant/all_branch
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVXNlciBPbmUiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ1c2VyX29uZUBnbWFpbC5jb20iLCJleHAiOjE3ODk3NTgzMTQsImlzcyI6IkFNU0JhY2tlbmQiLCJhdWQiOiJBTVNGcm9udGVuZCJ9.nVlz-I2ZANn7GkYeIvtRNvERJ7JKgu2ypLEggpre84o
+
+### register request
+POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Register}}
+Accept: application/json
+Content-Type: application/json
+{
+  "Name":"User One",
+  "Email":"user_one@gmail.com",
+  "Mobile":"1111111111",
+  "Password":"11111111"
+}
+
+###  login request
+POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Login}}
+Accept:application/json
+Content-Type:application/json
+{
+  "UserName":"1111111111",
+  "Password":"11111111"
+}
+
+### restuarant post request 
+POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Restuarant}}
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":0,
+  "Name":"Restuarant A",
+  "Email":"restuarant_a@gmail.com",
+  "Mobile":"1111111111",
+  "FssaiLicenseNo":"FSSAI001",
+  "Address":"Rajkot"
+}
+
+### second restuarant post
+POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Restuarant}}
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":0,
+  "Name":"Restuarant C",
+  "Email":"restuarant_c@gmail.com",
+  "Mobile":"3333333333",
+  "FssaiLicenseNo":"FSSAI003",
+  "Address":"Ahmedabad"
+}
+
+### second restuarant put
+PUT {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Restuarant}}/11
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":11,
+  "Name":"Restuarant C Edit",
+  "Email":"restuarant_c@gmail.comEdit",
+  "Mobile":"3333333333EDIT",
+  "FssaiLicenseNo":"FSSAI003EDIT",
+  "Address":"Ahmedabad EDIT"
+}
+
+### RESTUARANT delete
+delete {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Restuarant}}/11
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+
+### RESTUARANT get
+get {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Restuarant}}/10
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+
+
+### RESTUARANT branch post
+POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Branch}}
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":"0",
+  "RestaurantId":9,
+  "BranchName":"madhapar branch",
+  "Address":"raiya",
+  "City":"Rajkot",
+  "State":"Gujarat",
+  "Pincode":"360001",
+  "Mobile":"7512845897",
+  "Email":"branch_m@gmail.com"
+}
+
+### RESTUARANT branch put
+put {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Branch}}/6
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":"6",
+  "RestaurantId":9,
+  "BranchName":"madhapar branch edit",
+  "Address":"raiya edit",
+  "City":"Rajkot edit",
+  "State":"Gujarat edit",
+  "Pincode":"360000000",
+  "Mobile":"3333333333",
+  "Email":"branch_3@gmail.com"
+}
+
+### RESTUARANT branch put
+delete {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Branch}}/6
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+
+
+### RESTUARANT branch Get all
+get {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.AllBranch}}/9
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+
+### RESTUARANT branch Get 
+get {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Branch}}/5
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}

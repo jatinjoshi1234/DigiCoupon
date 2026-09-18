@@ -1,0 +1,15 @@
+F:\Jatin\DigiCoupon\DigiCoupon.Application\bin\Debug\net10.0\DigiCoupon.Application.deps.json
+F:\Jatin\DigiCoupon\DigiCoupon.Application\bin\Debug\net10.0\DigiCoupon.Application.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Application\bin\Debug\net10.0\DigiCoupon.Application.pdb
+F:\Jatin\DigiCoupon\DigiCoupon.Application\bin\Debug\net10.0\DigiCoupon.Domain.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Application\bin\Debug\net10.0\DigiCoupon.Domain.pdb
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoupon.Application.csproj.AssemblyReference.cache
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoupon.Application.GeneratedMSBuildEditorConfig.editorconfig
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoupon.Application.AssemblyInfoInputs.cache
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoupon.Application.AssemblyInfo.cs
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoupon.Application.csproj.CoreCompileInputs.cache
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoup.994B79BD.Up2Date
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoupon.Application.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\refint\DigiCoupon.Application.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoupon.Application.pdb
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\ref\DigiCoupon.Application.dll

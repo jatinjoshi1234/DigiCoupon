@@ -1,0 +1,11 @@
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\bin\Debug\net10.0\DigiCoupon.Domain.deps.json
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\bin\Debug\net10.0\DigiCoupon.Domain.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\bin\Debug\net10.0\DigiCoupon.Domain.pdb
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\DigiCoupon.Domain.GeneratedMSBuildEditorConfig.editorconfig
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\DigiCoupon.Domain.AssemblyInfoInputs.cache
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\DigiCoupon.Domain.AssemblyInfo.cs
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\DigiCoupon.Domain.csproj.CoreCompileInputs.cache
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\DigiCoupon.Domain.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\refint\DigiCoupon.Domain.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\DigiCoupon.Domain.pdb
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\ref\DigiCoupon.Domain.dll

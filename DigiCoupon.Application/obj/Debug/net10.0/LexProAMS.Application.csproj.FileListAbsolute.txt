@@ -1,0 +1,15 @@
+F:\Jatin\LexProAMS\LexProAMS.Application\bin\Debug\net10.0\LexProAMS.Application.deps.json
+F:\Jatin\LexProAMS\LexProAMS.Application\bin\Debug\net10.0\LexProAMS.Application.dll
+F:\Jatin\LexProAMS\LexProAMS.Application\bin\Debug\net10.0\LexProAMS.Application.pdb
+F:\Jatin\LexProAMS\LexProAMS.Application\bin\Debug\net10.0\LexProAMS.Domain.dll
+F:\Jatin\LexProAMS\LexProAMS.Application\bin\Debug\net10.0\LexProAMS.Domain.pdb
+F:\Jatin\LexProAMS\LexProAMS.Application\obj\Debug\net10.0\LexProAMS.Application.csproj.AssemblyReference.cache
+F:\Jatin\LexProAMS\LexProAMS.Application\obj\Debug\net10.0\LexProAMS.Application.GeneratedMSBuildEditorConfig.editorconfig
+F:\Jatin\LexProAMS\LexProAMS.Application\obj\Debug\net10.0\LexProAMS.Application.AssemblyInfoInputs.cache
+F:\Jatin\LexProAMS\LexProAMS.Application\obj\Debug\net10.0\LexProAMS.Application.AssemblyInfo.cs
+F:\Jatin\LexProAMS\LexProAMS.Application\obj\Debug\net10.0\LexProAMS.Application.csproj.CoreCompileInputs.cache
+F:\Jatin\LexProAMS\LexProAMS.Application\obj\Debug\net10.0\LexProAM.AB90A023.Up2Date
+F:\Jatin\LexProAMS\LexProAMS.Application\obj\Debug\net10.0\LexProAMS.Application.dll
+F:\Jatin\LexProAMS\LexProAMS.Application\obj\Debug\net10.0\refint\LexProAMS.Application.dll
+F:\Jatin\LexProAMS\LexProAMS.Application\obj\Debug\net10.0\LexProAMS.Application.pdb
+F:\Jatin\LexProAMS\LexProAMS.Application\obj\Debug\net10.0\ref\LexProAMS.Application.dll

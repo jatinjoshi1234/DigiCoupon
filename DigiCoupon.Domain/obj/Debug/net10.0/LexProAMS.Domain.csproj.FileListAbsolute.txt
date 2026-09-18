@@ -1,0 +1,11 @@
+F:\Jatin\LexProAMS\LexProAMS.Domain\bin\Debug\net10.0\LexProAMS.Domain.deps.json
+F:\Jatin\LexProAMS\LexProAMS.Domain\bin\Debug\net10.0\LexProAMS.Domain.dll
+F:\Jatin\LexProAMS\LexProAMS.Domain\bin\Debug\net10.0\LexProAMS.Domain.pdb
+F:\Jatin\LexProAMS\LexProAMS.Domain\obj\Debug\net10.0\LexProAMS.Domain.GeneratedMSBuildEditorConfig.editorconfig
+F:\Jatin\LexProAMS\LexProAMS.Domain\obj\Debug\net10.0\LexProAMS.Domain.AssemblyInfoInputs.cache
+F:\Jatin\LexProAMS\LexProAMS.Domain\obj\Debug\net10.0\LexProAMS.Domain.AssemblyInfo.cs
+F:\Jatin\LexProAMS\LexProAMS.Domain\obj\Debug\net10.0\LexProAMS.Domain.csproj.CoreCompileInputs.cache
+F:\Jatin\LexProAMS\LexProAMS.Domain\obj\Debug\net10.0\LexProAMS.Domain.dll
+F:\Jatin\LexProAMS\LexProAMS.Domain\obj\Debug\net10.0\refint\LexProAMS.Domain.dll
+F:\Jatin\LexProAMS\LexProAMS.Domain\obj\Debug\net10.0\LexProAMS.Domain.pdb
+F:\Jatin\LexProAMS\LexProAMS.Domain\obj\Debug\net10.0\ref\LexProAMS.Domain.dll
