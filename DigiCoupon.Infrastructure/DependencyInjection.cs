@@ -8,6 +8,7 @@ using DigiCoupon.Infrastructure.Persistence.Interfaces;
 using DigiCoupon.Infrastructure.Persistence.Repositories;
 using DigiCoupon.Infrastrucure.Persistence.Auth;
 using DigiCoupon.Infrastrucure.Persistence.Repositories;
+using DigiCoupon.Infrastrucure.Persistence.Security;
 
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -36,7 +37,7 @@ namespace DigiCoupon.Infrastrucure
             service.AddScoped<IBase, Base>();
             service.AddScoped<ICurrentUser, CurrentUser>();
             service.AddScoped<ITokenProvider, TokenProvider>();
-            service.AddScoped<IPasswordProvider, DigiCoupon.Infrastrucure.Persistence.Security.PasswordProvider>();
+            service.AddScoped<IPasswordProvider, PasswordProvider>();
             service.AddScoped<IDapperContext, DapperContext>();
             service.AddScoped<IFileStorage, FileStorageContext>();
             service.AddScoped<IChatService, ChatService>();
@@ -44,6 +45,9 @@ namespace DigiCoupon.Infrastrucure
             service.AddScoped<IRestaurant, Restaurant>();
             service.AddScoped<IRestuarantBranches, RestuarantBranches>();
             service.AddScoped<ICustomers, Customers>();
+            service.AddScoped<ICustomerCoupon, CustomerCoupon>();
+            service.AddScoped<ICouponRedemption, CouponRedemptions>();
+            service.AddScoped<IDashboard, Dashboards>();
             return service;
         }
 

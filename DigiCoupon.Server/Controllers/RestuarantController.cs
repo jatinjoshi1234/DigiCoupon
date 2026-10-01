@@ -4,6 +4,8 @@ using DigiCoupon.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+using System.Text.Json;
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DigiCoupon.Server.Controllers
@@ -33,6 +35,7 @@ namespace DigiCoupon.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] RestuarantRequestDto args)
         {
+            Console.WriteLine("Post data => ", JsonSerializer.Serialize(args));
             var res = await service.AddAsync(args);
             return Ok(res); 
         }

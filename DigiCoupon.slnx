@@ -1,9 +1,26 @@
 <Solution>
+  <Configurations>
+    <BuildType Name="Debug" />
+    <BuildType Name="DebugLocal" />
+    <BuildType Name="Release" />
+  </Configurations>
   <Folder Name="/Solution Items/">
     <File Path="README.md" />
   </Folder>
-  <Project Path="DigiCoupon.Application/DigiCoupon.Application.csproj" />
-  <Project Path="DigiCoupon.Domain/DigiCoupon.Domain.csproj" />
-  <Project Path="DigiCoupon.Infrastructure/DigiCoupon.Infrastructure.csproj" />
-  <Project Path="DigiCoupon.Server/DigiCoupon.Server.csproj" />
+  <Project Path="DigiCoupon.Application/DigiCoupon.Application.csproj">
+    <BuildType Solution="DebugLocal|*" Project="Debug" />
+  </Project>
+  <Project Path="DigiCoupon.Domain/DigiCoupon.Domain.csproj">
+    <BuildType Solution="DebugLocal|*" Project="Debug" />
+  </Project>
+  <Project Path="DigiCoupon.Infrastructure/DigiCoupon.Infrastructure.csproj">
+    <BuildType Solution="DebugLocal|*" Project="Debug" />
+  </Project>
+  <Project Path="DigiCoupon.Reports/DigiCoupon.Reports.rptproj">
+    <Deploy Solution="Debug|*" />
+    <Deploy Solution="Release|*" />
+  </Project>
+  <Project Path="DigiCoupon.Server/DigiCoupon.Server.csproj">
+    <BuildType Solution="DebugLocal|*" Project="Debug" />
+  </Project>
 </Solution>

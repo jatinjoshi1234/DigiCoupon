@@ -1,4 +1,5 @@
 ﻿
+using DigiCoupon.Application.Interfaces.Repositories;
 using DigiCoupon.Application.Interfaces.Services;
 using DigiCoupon.Application.Services;
 
@@ -18,6 +19,9 @@ namespace DigiCoupon.Application
             service.AddScoped<IRestaurantService, RestuarantService>();
             service.AddScoped<IRestaurantBranchService, RestuarantBranchService>();
             service.AddScoped<ICustomerService, CustomerService>();
+            service.AddScoped<ICustomerCouponService, CustomerCouponService>();
+            service.AddScoped<ICouponRedemptionsService, CouponRedemptionsService>();
+            service.AddScoped<IDashboardService, DashboardService>();
             return service;
         }
     }

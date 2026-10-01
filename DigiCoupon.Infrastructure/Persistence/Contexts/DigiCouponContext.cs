@@ -28,7 +28,7 @@ namespace DigiCoupon.Infrastructure.Persistence.Contexts
 
         public DbSet<CustomerCoupon> CustomerCoupon { get; set; }
 
-        public DbSet<CouponRedemption> PassRedemptions { get; set; }
+        public DbSet<CouponRedemption> CouponRedemptions { get; set; }
 
         public DbSet<Payment> Payments { get; set; }
 

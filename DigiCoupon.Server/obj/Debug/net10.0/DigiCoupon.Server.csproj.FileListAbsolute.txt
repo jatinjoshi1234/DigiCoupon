@@ -222,4 +222,5 @@ F:\Jatin\DigiCoupon\DigiCoupon.Server\obj\Debug\net10.0\refint\DigiCoupon.Server
 F:\Jatin\DigiCoupon\DigiCoupon.Server\obj\Debug\net10.0\DigiCoupon.Server.pdb
 F:\Jatin\DigiCoupon\DigiCoupon.Server\obj\Debug\net10.0\DigiCoupon.Server.genruntimeconfig.cache
 F:\Jatin\DigiCoupon\DigiCoupon.Server\obj\Debug\net10.0\ref\DigiCoupon.Server.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Server\obj\Debug\net10.0\DigiCoupon.Server.sourcelink.json
 F:\Jatin\DigiCoupon\DigiCoupon.Server\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt

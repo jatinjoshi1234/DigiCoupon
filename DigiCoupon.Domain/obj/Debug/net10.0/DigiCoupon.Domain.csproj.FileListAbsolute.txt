@@ -9,3 +9,4 @@ F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\DigiCoupon.Domain.dll
 F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\refint\DigiCoupon.Domain.dll
 F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\DigiCoupon.Domain.pdb
 F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\ref\DigiCoupon.Domain.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Domain\obj\Debug\net10.0\DigiCoupon.Domain.sourcelink.json

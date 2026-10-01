@@ -13,3 +13,4 @@ F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoupon.Applicat
 F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\refint\DigiCoupon.Application.dll
 F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoupon.Application.pdb
 F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\ref\DigiCoupon.Application.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Application\obj\Debug\net10.0\DigiCoupon.Application.sourcelink.json

@@ -28,6 +28,9 @@ namespace DigiCoupon.Infrastrucure.Persistence.Configurations
                 .HasConversion<int>()
                 .IsRequired();
 
+            entity.Property(x => x.IsExpired)
+                .HasDefaultValueSql("0");
+
             entity.Property(x => x.Price)
                 .HasPrecision(18, 2)
                 .IsRequired();
@@ -46,19 +49,17 @@ namespace DigiCoupon.Infrastrucure.Persistence.Configurations
             //      .HasForeignKey(x => x.RestaurantBranchId).IsRequired(false)
             //      .OnDelete(DeleteBehavior.NoAction);
 
-         //   entity.HasOne(x => x.Customer)
-         //       .WithMany(x => x.Coupon)
-         //       .HasForeignKey(x => x.CustomerId)
-         //       .OnDelete(DeleteBehavior.NoAction);
+            //   entity.HasOne(x => x.Customer)
+            //       .WithMany(x => x.Coupon)
+            //       .HasForeignKey(x => x.CustomerId)
+            //       .OnDelete(DeleteBehavior.NoAction);
 
-         //   entity.HasIndex(x => new
-         //   {
-         //       x.RestaurantBranchId,
-         //       x.CouponNumber
-         //   })
-         //.IsUnique();
+            entity.HasIndex(x => new
+            {
+                x.CouponNumber
+            }).IsUnique();
 
-         //   entity.HasIndex(x => x.CustomerId);
+            //   entity.HasIndex(x => x.CustomerId);
         }
     }
 }

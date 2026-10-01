@@ -11,11 +11,13 @@ using System.Collections.Generic;
 using System.Linq.Expressions;
 using System.Text;
 
+using static Dapper.SqlMapper;
+
 namespace DigiCoupon.Infrastructure.Persistence.Repositories
 {
     internal class Base : IBase
     {
-        private readonly DigiCouponContext _context;
+        protected internal readonly DigiCouponContext _context;
         public Base(DigiCouponContext dbContext)
         {
             _context = dbContext;
@@ -42,7 +44,7 @@ namespace DigiCoupon.Infrastructure.Persistence.Repositories
         public async Task<bool> ExistsAsync<TEntity>(Expression<Func<TEntity, bool>> args) where TEntity : class
         {
             var active = args.And(BaseFilter<TEntity>());
-            return await _context.Set<TEntity>().AsNoTracking().AnyAsync(args);
+            return await _context.Set<TEntity>().AsNoTracking().AnyAsync(active);
         }
 
         /// <summary>
@@ -214,11 +216,14 @@ namespace DigiCoupon.Infrastructure.Persistence.Repositories
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="args"></param>
         /// <returns>Entity</returns>
-        public async Task<TEntity?> GetByIdAsync<TEntity>(Expression<Func<TEntity, bool>> args) where TEntity : class
+        public async Task<TEntity?> GetByIdAsync<TEntity>(Expression<Func<TEntity, bool>> args,bool isTracking = true) where TEntity : class
         {
             var filter = BaseFilter<TEntity>();
             filter = filter.And(args);
-            return await _context.Set<TEntity>().AsNoTracking().FirstOrDefaultAsync(filter);
+            IQueryable<TEntity> query = _context.Set<TEntity>();
+            if(isTracking)
+                query = query.AsNoTracking();
+            return await query.FirstOrDefaultAsync(filter);
         }
 
         /// <summary>
@@ -279,6 +284,15 @@ namespace DigiCoupon.Infrastructure.Persistence.Repositories
 
             return affectedRows > 0;
         }
+
+        public async Task<int> CountAsync<TEntity>(Expression<Func<TEntity, bool>> args) where TEntity : class
+        {
+            var filter = BaseFilter<TEntity>();
+            filter = filter.And(args);
+            return await _context.Set<TEntity>().Where(filter).CountAsync();
+        }
+
+
 
         public async Task<int> SaveChangesAsync()
         {

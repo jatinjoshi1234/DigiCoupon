@@ -17,3 +17,4 @@ F:\Jatin\DigiCoupon\DigiCoupon.Infrastructure\obj\Debug\net10.0\refint\DigiCoupo
 F:\Jatin\DigiCoupon\DigiCoupon.Infrastructure\obj\Debug\net10.0\DigiCoupon.Infrastructure.pdb
 F:\Jatin\DigiCoupon\DigiCoupon.Infrastructure\obj\Debug\net10.0\DigiCoupon.Infrastructure.genruntimeconfig.cache
 F:\Jatin\DigiCoupon\DigiCoupon.Infrastructure\obj\Debug\net10.0\ref\DigiCoupon.Infrastructure.dll
+F:\Jatin\DigiCoupon\DigiCoupon.Infrastructure\obj\Debug\net10.0\DigiCoupon.Infrastructure.sourcelink.json

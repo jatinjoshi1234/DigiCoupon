@@ -11,9 +11,12 @@ namespace DigiCoupon.Server.Controllers
     public class AccountController(IUserService service) : ControllerBase
     {
         [HttpPost("login")]
-        public async Task<IActionResult> LoginAsync([FromBody] LoginRequestDto args) => Ok(await service.LoginAsync(args));
+        public async Task<IActionResult> LoginAsync([FromBody] LoginRequestDto args) => Ok(
+            await service.LoginAsync(args)
+        );
 
         [HttpPost("register")]
         public async Task<IActionResult> RegisterAsync([FromBody] RegisterRequestDto args) => Ok(await service.RegisterAsync(args));
+        
     }
 }

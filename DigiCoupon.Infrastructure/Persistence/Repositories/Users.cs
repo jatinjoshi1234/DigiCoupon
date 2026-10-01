@@ -1,5 +1,7 @@
 ﻿using DigiCoupon.Application.Interfaces.Repositories;
-using DigiCoupon.Domain.Entities;
+
+
+using Microsoft.EntityFrameworkCore;
 
 using System;
 using System.Collections.Generic;
@@ -25,6 +27,8 @@ namespace DigiCoupon.Infrastructure.Persistence.Repositories
         }
 
         public async Task<Domain.Entities.Users> GetByAsync(Expression<Func<Domain.Entities.Users, bool>> args) => await context.GetByIdAsync<Domain.Entities.Users>(args);
+        
+        public async Task<Domain.Entities.Users> GetByAsync(Expression<Func<Domain.Entities.Users, bool>> args, Expression<Func<Domain.Entities.Users, object>> args2) => await context.GetByIdAsync<Domain.Entities.Users>(args,x=>x.Include(args2));
 
         public async Task<int> UpdateAsync(Domain.Entities.Users req)
         {

@@ -13,6 +13,8 @@ namespace DigiCoupon.Application.DTO
         string? NickName,
         string Mobile,
         string MemberCode,
-        string PublicToken
+        string PublicToken,
+        DateTime CreateOn,
+        bool IsActive
     );
 }

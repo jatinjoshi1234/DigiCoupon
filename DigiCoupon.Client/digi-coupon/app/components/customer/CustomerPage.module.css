@@ -1,0 +1,711 @@
+.page {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+/* ========================================
+   HEADER
+======================================== */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+  margin-bottom: 22px;
+}
+
+.titleSection {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+}
+
+.titleIcon {
+  width: 46px;
+  height: 46px;
+  border-radius: 12px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--dc-primary-light);
+  color: var(--dc-primary);
+}
+
+.titleSection h1 {
+  margin: 0;
+  color: var(--dc-text);
+  font-size: 25px;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.titleSection p {
+  margin: 5px 0 0;
+  color: var(--dc-text-muted);
+  font-size: 14px;
+}
+
+
+/* ========================================
+   BUTTONS
+======================================== */
+
+.primaryButton {
+  min-height: 42px;
+  padding: 0 17px;
+
+  border: 0;
+  border-radius: 9px;
+
+  background: var(--dc-primary);
+  color: #fff;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease;
+}
+
+.primaryButton:hover {
+  background: var(--dc-primary-dark);
+}
+
+.primaryButton:active {
+  transform: scale(0.98);
+}
+
+
+/* ========================================
+   TOOLBAR
+======================================== */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+
+  margin-bottom: 18px;
+}
+
+.searchBox {
+  width: min(480px, 100%);
+  height: 44px;
+
+  padding: 0 13px;
+
+  display: flex;
+  align-items: center;
+  gap: 9px;
+
+  border: 1px solid var(--dc-border);
+  border-radius: 10px;
+
+  background: #fff;
+  color: var(--dc-text-muted);
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.searchBox:focus-within {
+  border-color: var(--dc-primary);
+
+  box-shadow:
+    0 0 0 3px var(--dc-primary-light);
+}
+
+.searchBox input {
+  width: 100%;
+
+  border: 0;
+  outline: 0;
+
+  background: transparent;
+
+  color: var(--dc-text);
+  font-size: 14px;
+}
+
+.searchBox input::placeholder {
+  color: var(--dc-text-light);
+}
+
+.customerCount {
+  color: var(--dc-text-muted);
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+
+/* ========================================
+   CUSTOMER GRID
+======================================== */
+
+.customerGrid {
+  display: grid;
+
+  grid-template-columns:
+    repeat(3, minmax(0, 1fr));
+
+  gap: 16px;
+}
+
+
+/* ========================================
+   CUSTOMER CARD
+======================================== */
+
+.customerCard {
+  background: #fff;
+
+  border: 1px solid var(--dc-border-light);
+  border-radius: 14px;
+
+  padding: 18px;
+
+  box-shadow: var(--dc-shadow-sm);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.customerCard:hover {
+  transform: translateY(-2px);
+
+  border-color: var(--dc-primary-lighter);
+
+  box-shadow: var(--dc-shadow);
+}
+
+
+/* ========================================
+   CARD HEADER
+======================================== */
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 10px;
+
+  margin-bottom: 17px;
+}
+
+.customerIdentity {
+  display: flex;
+  align-items: center;
+
+  gap: 11px;
+
+  min-width: 0;
+}
+
+.avatar {
+  width: 43px;
+  height: 43px;
+
+  flex-shrink: 0;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--dc-primary-light);
+  color: var(--dc-primary);
+
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.customerName {
+  min-width: 0;
+}
+
+.customerName h3 {
+  margin: 0;
+
+  color: var(--dc-text);
+
+  font-size: 15px;
+  font-weight: 650;
+
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.customerName span {
+  display: block;
+
+  margin-top: 3px;
+
+  color: var(--dc-text-muted);
+
+  font-size: 12px;
+}
+
+.viewIconButton {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid var(--dc-border);
+  border-radius: 8px;
+
+  background: #fff;
+  color: var(--dc-text-muted);
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.viewIconButton:hover {
+  color: var(--dc-primary);
+  border-color: var(--dc-primary-lighter);
+  background: var(--dc-primary-light);
+}
+
+
+/* ========================================
+   MOBILE NUMBER
+======================================== */
+
+.mobileNumber {
+  display: flex;
+  align-items: center;
+
+  gap: 8px;
+
+  padding: 11px 12px;
+
+  border-radius: 9px;
+
+  background: #fafafa;
+
+  color: var(--dc-text-secondary);
+
+  font-size: 13px;
+  font-weight: 500;
+
+  margin-bottom: 12px;
+}
+
+.mobileNumber svg {
+  color: var(--dc-primary);
+}
+
+
+/* ========================================
+   PASS STATUS
+======================================== */
+
+.passStatus {
+  min-height: 58px;
+
+  display: flex;
+  align-items: center;
+
+  gap: 10px;
+
+  padding: 10px 12px;
+
+  border-radius: 10px;
+}
+
+.passActive {
+  background: var(--dc-success-light);
+  color: var(--dc-success);
+}
+
+.passWarning {
+  background: var(--dc-warning-light);
+  color: var(--dc-warning);
+}
+
+.noPass {
+  background: #f9fafb;
+  color: var(--dc-text-muted);
+}
+
+.passIcon {
+  width: 34px;
+  height: 34px;
+
+  flex-shrink: 0;
+
+  border-radius: 8px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: rgba(255, 255, 255, 0.7);
+}
+
+.passInfo {
+  min-width: 0;
+}
+
+.passInfo strong {
+  display: block;
+
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.passInfo span {
+  display: block;
+
+  margin-top: 2px;
+
+  font-size: 11px;
+
+  opacity: 0.8;
+}
+
+
+/* ========================================
+   ACTIONS
+======================================== */
+
+.cardActions {
+  display: grid;
+
+  grid-template-columns: 1fr 1fr;
+
+  gap: 8px;
+
+  margin-top: 15px;
+}
+
+.viewButton,
+.redeemButton {
+  min-height: 40px;
+
+  border-radius: 9px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 6px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition: 0.2s ease;
+}
+
+.viewButton {
+  border: 1px solid var(--dc-border);
+
+  background: #fff;
+
+  color: var(--dc-text-secondary);
+}
+
+.viewButton:hover {
+  border-color: var(--dc-primary-lighter);
+  color: var(--dc-primary);
+  background: var(--dc-primary-light);
+}
+
+.redeemButton {
+  border: 0;
+
+  background: var(--dc-primary);
+
+  color: #fff;
+}
+
+.redeemButton:hover {
+  background: var(--dc-primary-dark);
+}
+
+
+/* ========================================
+   PAGINATION
+======================================== */
+
+.pagination {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  margin-top: 24px;
+  padding-bottom: 8px;
+}
+
+.pageNumbers {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pageButton,
+.pageNumber {
+  height: 36px;
+
+  border: 1px solid var(--dc-border);
+
+  border-radius: 8px;
+
+  background: #fff;
+
+  color: var(--dc-text-secondary);
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  cursor: pointer;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  transition: 0.2s ease;
+}
+
+.pageButton {
+  padding: 0 11px;
+
+  gap: 5px;
+}
+
+.pageNumber {
+  width: 36px;
+}
+
+.pageButton:hover:not(:disabled),
+.pageNumber:hover {
+  border-color: var(--dc-primary-lighter);
+  color: var(--dc-primary);
+}
+
+.pageButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.pageNumberActive {
+  background: var(--dc-primary);
+  border-color: var(--dc-primary);
+  color: #fff;
+}
+
+.pageNumberActive:hover {
+  background: var(--dc-primary-dark);
+  color: #fff;
+}
+
+
+/* ========================================
+   LOADING
+======================================== */
+
+.loading {
+  min-height: 350px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: var(--dc-text-muted);
+
+  font-size: 14px;
+}
+
+
+/* ========================================
+   EMPTY STATE
+======================================== */
+
+.emptyState {
+  min-height: 350px;
+
+  display: flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+
+  background: #fff;
+
+  border: 1px solid var(--dc-border-light);
+  border-radius: 14px;
+
+  padding: 30px;
+}
+
+.emptyIcon {
+  width: 60px;
+  height: 60px;
+
+  border-radius: 50%;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  background: var(--dc-primary-light);
+  color: var(--dc-primary);
+
+  margin-bottom: 15px;
+}
+
+.emptyState h3 {
+  margin: 0 0 6px;
+
+  font-size: 17px;
+  color: var(--dc-text);
+}
+
+.emptyState p {
+  max-width: 420px;
+
+  margin: 0 0 18px;
+
+  color: var(--dc-text-muted);
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+
+/* ========================================
+   TABLET
+======================================== */
+
+@media (max-width: 1100px) {
+  .customerGrid {
+    grid-template-columns:
+      repeat(2, minmax(0, 1fr));
+  }
+}
+
+
+/* ========================================
+   MOBILE
+======================================== */
+
+@media (max-width: 700px) {
+  .header {
+    align-items: flex-start;
+  }
+
+  .titleSection {
+    align-items: flex-start;
+  }
+
+  .titleIcon {
+    width: 42px;
+    height: 42px;
+  }
+
+  .titleSection h1 {
+    font-size: 21px;
+  }
+
+  .titleSection p {
+    font-size: 12px;
+  }
+
+  .primaryButton {
+    width: 44px;
+    height: 42px;
+    padding: 0;
+  }
+
+  .primaryButton span {
+    display: none;
+  }
+
+  .toolbar {
+    display: block;
+  }
+
+  .searchBox {
+    width: 100%;
+  }
+
+  .customerCount {
+    margin-top: 8px;
+    text-align: right;
+  }
+
+  .customerGrid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .customerCard {
+    padding: 16px;
+  }
+
+  .cardHeader {
+    margin-bottom: 14px;
+  }
+
+  .mobileNumber {
+    margin-bottom: 10px;
+  }
+
+  .cardActions {
+    grid-template-columns: 1fr;
+  }
+
+  .viewButton,
+  .redeemButton {
+    min-height: 44px;
+  }
+
+  .pagination {
+    margin-top: 20px;
+  }
+
+  .pageButton {
+    width: 38px;
+    padding: 0;
+  }
+
+  .desktopOnly {
+    display: none;
+  }
+
+  .pageNumber {
+    width: 34px;
+    height: 34px;
+  }
+}

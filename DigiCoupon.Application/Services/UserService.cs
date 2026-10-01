@@ -11,7 +11,7 @@ using System.Xml.Linq;
 
 namespace DigiCoupon.Application.Services
 {
-    public class UserService(IUsers context, IPasswordProvider hashProvider, ITokenProvider tokenProvider) : IUserService
+    public class UserService(IUsers context, IPasswordProvider hashProvider, ITokenProvider tokenProvider, IRestaurantService restuarantContext) : IUserService
     {
         public async Task<ApiResponse> RegisterAsync(RegisterRequestDto request)
         {
@@ -37,7 +37,7 @@ namespace DigiCoupon.Application.Services
 
         public async Task<ApiResponse> LoginAsync(LoginRequestDto request)
         {
-            Users user = await context.GetByAsync(x => x.Email == request.UserName || x.Mobile == request.UserName);
+            Users user = await context.GetByAsync(x => x.Email == request.UserName || x.Mobile == request.UserName, x => x.Restaurants);
 
             if (user == null)
                 return ApiResponse.OnFailer("User not found. Please register.");
@@ -49,7 +49,10 @@ namespace DigiCoupon.Application.Services
 
             var token = await tokenProvider.GenerateToken(user);
 
-            return ApiResponse.OnSuccess("User login successfully.", token);
+            bool result = await restuarantContext.Exists(user.Id);
+
+            var data = new { AccessToken = token, User = MapDto(user), IsRestuarantCreated = result, Restuarant = result ? await restuarantContext.GetByUserAsync(user.Id) : null };
+            return ApiResponse.OnSuccess("User login successfully.", data);
         }
 
         private Users MapDto(RegisterRequestDto request, string HashPassword)

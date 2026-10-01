@@ -72,18 +72,18 @@ namespace DigiCoupon.Infrastructure.Persistence.Migrations
                         .HasColumnName("user_id");
 
                     b.HasKey("Id")
-                        .HasName("pk_pass_redemptions");
+                        .HasName("pk_coupon_redemptions");
 
                     b.HasIndex("CustomerCouponId")
-                        .HasDatabaseName("ix_pass_redemptions_customer_coupon_id");
+                        .HasDatabaseName("ix_coupon_redemptions_customer_coupon_id");
 
                     b.HasIndex("RestaurantBranchId")
-                        .HasDatabaseName("ix_pass_redemptions_restaurant_branch_id");
+                        .HasDatabaseName("ix_coupon_redemptions_restaurant_branch_id");
 
                     b.HasIndex("UserId")
-                        .HasDatabaseName("ix_pass_redemptions_user_id");
+                        .HasDatabaseName("ix_coupon_redemptions_user_id");
 
-                    b.ToTable("pass_redemptions", (string)null);
+                    b.ToTable("coupon_redemptions", (string)null);
                 });
 
             modelBuilder.Entity("DigiCoupon.Domain.Entities.CustomerCoupon", b =>
@@ -131,6 +131,10 @@ namespace DigiCoupon.Infrastructure.Persistence.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit")
                         .HasColumnName("is_deleted");
+
+                    b.Property<bool>("IsExpired")
+                        .HasColumnType("bit")
+                        .HasColumnName("is_expired");
 
                     b.Property<int?>("ModifiedBy")
                         .HasColumnType("int")
@@ -577,20 +581,20 @@ namespace DigiCoupon.Infrastructure.Persistence.Migrations
                         .HasForeignKey("CustomerCouponId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
-                        .HasConstraintName("fk_pass_redemptions_customer_coupon_customer_coupon_id");
+                        .HasConstraintName("fk_coupon_redemptions_customer_coupon_customer_coupon_id");
 
                     b.HasOne("DigiCoupon.Domain.Entities.RestaurantBranch", "RestaurantBranch")
                         .WithMany("CouponRedemptions")
                         .HasForeignKey("RestaurantBranchId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired()
-                        .HasConstraintName("fk_pass_redemptions_restaurant_branches_restaurant_branch_id");
+                        .HasConstraintName("fk_coupon_redemptions_restaurant_branches_restaurant_branch_id");
 
                     b.HasOne("DigiCoupon.Domain.Entities.Users", "User")
                         .WithMany("CouponRedemption")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.NoAction)
-                        .HasConstraintName("fk_pass_redemptions_users_user_id");
+                        .HasConstraintName("fk_coupon_redemptions_users_user_id");
 
                     b.Navigation("CustomerCoupon");
 

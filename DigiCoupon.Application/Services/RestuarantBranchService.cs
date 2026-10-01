@@ -15,7 +15,7 @@ namespace DigiCoupon.Application.Services
     {
         public async Task<ApiResponse> AddAsync(RestuarantBranchDto request)
         {
-            bool isExists = await context.AnyAsync(x => x.BranchName == request.BranchName);
+            bool isExists = await context.AnyAsync(x =>x.RestaurantId == request.RestaurantId && x.BranchName == request.BranchName);
 
             if (isExists)
                 return ApiResponse.OnFailer("Branch allready registered.");

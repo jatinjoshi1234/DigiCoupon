@@ -2,9 +2,19 @@
 @DigiCoupon.Register = /auth/register
 @DigiCoupon.Login = /auth/login
 @DigiCoupon.Restuarant = /restuarant
+@DigiCoupon.Dashboard = /home
 @DigiCoupon.Branch = /restuarant/branch
 @DigiCoupon.AllBranch = /restuarant/all_branch
-@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiVXNlciBPbmUiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjEiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJ1c2VyX29uZUBnbWFpbC5jb20iLCJleHAiOjE3ODk3NTgzMTQsImlzcyI6IkFNU0JhY2tlbmQiLCJhdWQiOiJBTVNGcm9udGVuZCJ9.nVlz-I2ZANn7GkYeIvtRNvERJ7JKgu2ypLEggpre84o
+@DigiCoupon.Customers = /customer
+@DigiCoupon.CustomerCoupon = /customercoupon
+@DigiCoupon.CouponRedemption = /CouponRedemption
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSmF0aW4gSm9zaGkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJqYXRpbkBnbWFpbC5jb20iLCJleHAiOjE3OTA3NzM5MDQsImlzcyI6IkFNU0JhY2tlbmQiLCJhdWQiOiJBTVNGcm9udGVuZCJ9.MdHmx3KZsGdM40kIId2JRL8pMqQAa1TG_oderGbHxZw
+
+### dashboard get
+get {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Dashboard}}/9/2026-09-25
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
 
 ### register request
 POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Register}}
@@ -47,10 +57,10 @@ Content-Type: application/json
 Authorization:Bearer {{Token}}
 {
   "Id":0,
-  "Name":"Restuarant C",
-  "Email":"restuarant_c@gmail.com",
-  "Mobile":"3333333333",
-  "FssaiLicenseNo":"FSSAI003",
+  "Name":"Restuarant D",
+  "Email":"restuarant_D@gmail.com",
+  "Mobile":"4444444444",
+  "FssaiLicenseNo":"FSSAI004",
   "Address":"Ahmedabad"
 }
 
@@ -88,14 +98,14 @@ Content-Type: application/json
 Authorization:Bearer {{Token}}
 {
   "Id":"0",
-  "RestaurantId":9,
-  "BranchName":"madhapar branch",
-  "Address":"raiya",
+  "RestaurantId":10,
+  "BranchName":"Branch A",
+  "Address":"adddress A",
   "City":"Rajkot",
   "State":"Gujarat",
-  "Pincode":"360001",
-  "Mobile":"7512845897",
-  "Email":"branch_m@gmail.com"
+  "Pincode":"360002",
+  "Mobile":"7572899703",
+  "Email":"branch_b@gmail.com"
 }
 
 ### RESTUARANT branch put
@@ -130,6 +140,144 @@ Authorization:Bearer {{Token}}
 
 ### RESTUARANT branch Get 
 get {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Branch}}/5
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+
+### CUSTOMER post
+POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Customers}}
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":0,
+  "RestaurantId":10,
+  "RestaurantBranchId":7,
+   "FirstName":"Customer",
+   "LastName" :"B1",
+   "NickName":"Customer B2",
+   "Mobile":"2223336669",
+   "MemberCode":"R9-003",
+   "PublicToken":"url"
+}
+
+### CUSTOMER post 1
+POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Customers}}
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":0,
+  "RestaurantId":9,
+  "RestaurantBranchId":4,
+   "FirstName":"Customer",
+   "LastName" :"A2",
+   "NickName":"Customer A2",
+   "Mobile":"2222222222",
+   "MemberCode":"R9-002",
+   "PublicToken":"url"
+}
+
+### CUSTOMER put 2
+put {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Customers}}/6
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":6,
+  "RestaurantId":9,
+  "RestaurantBranchId":5,
+  "FirstName":"Customer",
+  "LastName" :"A4",
+  "NickName":"Customer",
+  "Mobile":"4444444444",
+  "MemberCode":"R9-04",
+  "PublicToken":"url"
+}
+
+### CUSTOMER delete 2
+delete {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Customers}}/4
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+
+### CUSTOMER get by id 3
+get {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Customers}}/3
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+
+### CUSTOMER get by restuarant id 9
+get {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Customers}}/all/9
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+
+### CUSTOMER Coupon post 1
+POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.CustomerCoupon}}
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":0,
+  "RestaurantBranchId":7,
+  "CustomerId":10,
+  "CouponNumber":"DC",
+  "CouponType":2,
+  "Price":2400.00,
+  "StartDate":"2026-09-01",
+  "EndDate":"2026-09-30",
+  "TotalUsage":0
+}
+
+### CUSTOMER Coupon put 1
+put {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.CustomerCoupon}}/1
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":1,
+  "RestaurantBranchId":4,
+  "CustomerId":9,
+  "CouponNumber":"DC",
+  "CouponType":2,
+  "Price":3000.00,
+  "StartDate":"2026-09-01",
+  "EndDate":"2026-09-30",
+  "TotalUsage":0
+}
+
+### CUSTOMER Coupon delete 1
+delete {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.CustomerCoupon}}/2
+Accept: application/json
+Content-Type: application/json
+
+### CUSTOMER Coupon get by customer 1
+get {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.CustomerCoupon}}/all/4
+Accept: application/json
+Content-Type: application/json
+
+### Coupon redemption delete by coustomer coupon
+delete {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.CouponRedemption}}/all/1
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+
+
+### Coupon redemption post 1
+POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.CouponRedemption}}
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Id":0,
+  "RestaurantBranchId":7,
+  "CustomerCouponId":4,
+  "RedemptionDate":"2026-09-26"
+}
+
+### COUPON REDEMPTION get by coupon id
+get {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.CouponRedemption}}/all/1
 Accept: application/json
 Content-Type: application/json
 Authorization:Bearer {{Token}}

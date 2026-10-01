@@ -14,6 +14,7 @@ namespace DigiCoupon.Application.Interfaces.Services
         public Task<ApiResponse> UpdateAsync(int id, RestuarantRequestDto request);
         public Task<ApiResponse> DeleteAsync(int id);
         public Task<ApiResponse> GetByIdAsync(int id);
-
+        public Task<RestuarantRequestDto> GetByUserAsync(int id);
+        public Task<bool> Exists(int userId);
     }
 }

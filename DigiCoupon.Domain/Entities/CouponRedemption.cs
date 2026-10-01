@@ -8,19 +8,12 @@ namespace DigiCoupon.Domain.Entities
 {
     public class CouponRedemption:AuditableEntity
     {
-
         public int RestaurantBranchId { get; set; }
-
         public int CustomerCouponId { get; set; }
-
         // Date on which restaurant wants to record the redemption
         public DateTime RedemptionDate { get; set; }
-
-        // Navigation
         public RestaurantBranch RestaurantBranch { get; set; } 
-
         public CustomerCoupon CustomerCoupon { get; set; } 
-
         public Users User { get; set; } 
     }
 }

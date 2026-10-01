@@ -25,7 +25,14 @@ namespace DigiCoupon.Application.Interfaces.Repositories
         /// <param name="args"></param>
         /// <returns></returns>
         public Task<bool> ExistsAsync<TEntity>(Expression<Func<TEntity, bool>> args) where TEntity : class;
-
+        
+        /// <summary>
+        /// Get records count
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="args"></param>
+        /// <returns></returns>
+        public Task<int> CountAsync<TEntity>(Expression<Func<TEntity, bool>> args) where TEntity : class;
         /// <summary>
         /// Get active records 
         /// </summary>
@@ -93,7 +100,7 @@ namespace DigiCoupon.Application.Interfaces.Repositories
         /// <returns>Items and Count</returns>
         public Task<(List<TEntity> Items, int TotalCount)> GetAsync<TEntity>(
                     Expression<Func<TEntity, bool>> predicate,
-                    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,
+                    Func<IQueryable<TEntity>, IOrderedQueryable<TEntity>>? orderBy = null,  
                     int pageNumber = 1,
                     int pageSize = 10,
                     params Func<IQueryable<TEntity>, IQueryable<TEntity>>[] includes)
@@ -107,7 +114,7 @@ namespace DigiCoupon.Application.Interfaces.Repositories
         /// <typeparam name="TEntity"></typeparam>
         /// <param name="args"></param>
         /// <returns>Entity</returns>
-        public Task<TEntity> GetByIdAsync<TEntity>(Expression<Func<TEntity, bool>> args) where TEntity : class;
+        public Task<TEntity?> GetByIdAsync<TEntity>(Expression<Func<TEntity, bool>> args, bool isTracking = true) where TEntity : class;
         
         /// <summary>
         /// get single record with base filter

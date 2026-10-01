@@ -6,6 +6,7 @@ using DigiCoupon.Domain.Entities;
 
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Xml.Linq;
 
@@ -82,15 +83,16 @@ namespace DigiCoupon.Application.Services
                 LastName = request.LastName,
                 NickName = request.NickName,
                 Mobile = request.Mobile,
+                MemberCode = request.MemberCode,
                 PublicToken = request.PublicToken,
-                IsActive = true
+                IsActive = request.IsActive
             };
             return Customer;
         }
 
         private CustomerRequestDto MapDto(Customers obj)
         {
-            return new CustomerRequestDto(obj.Id, obj.RestaurantId, obj.BranchName, obj.Address, obj.City, obj.State, obj.Pincode, obj.Mobile, obj.Email);
+            return new CustomerRequestDto(obj.Id,obj.RestaurantId, obj.RestaurantBranchId, obj.FirstName, obj.LastName, obj.NickName, obj.Mobile, obj.MemberCode, obj.PublicToken,obj.CreatedOn, obj.IsActive);
         }
     }
 }

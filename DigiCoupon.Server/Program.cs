@@ -1,18 +1,36 @@
 using DigiCoupon.Application;
+using DigiCoupon.Application.DTO;
 using DigiCoupon.Infrastructure.Extensions;
-using DigiCoupon.Server.Middlewares;
-
 using DigiCoupon.Infrastrucure;
+using DigiCoupon.Server.Middlewares;
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 
 using System.Text;
+using System.Text.Json;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllers();
+var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").GetChildren().Select(x => x.Value.Trim().TrimEnd('/')).ToArray();
+
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy(name: "DigiCors",
+        policy =>
+        {
+            policy.WithOrigins(allowedOrigins)
+                  .AllowAnyHeader()
+                  .AllowAnyMethod();
+        });
+});
+
+builder.Services.AddControllers().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.PropertyNamingPolicy =
+        JsonNamingPolicy.CamelCase;
+}); ;
 
 builder.Services.AddOpenApi();
 
@@ -41,12 +59,43 @@ builder.Services.AddAuthentication(options =>
 
     options.Events = new JwtBearerEvents
     {
-        OnAuthenticationFailed = context =>
+        OnAuthenticationFailed = async context =>
         {
             Console.WriteLine(
                 $"JWT ERROR: {context.Exception.Message}");
 
-            return Task.CompletedTask;
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            context.Response.ContentType = "application/json";
+
+            var response = ApiResponse.OnFailer("Authentication required. Please provide a valid token.", StatusCodes.Status401Unauthorized);
+
+            await context.Response.WriteAsync(
+                JsonSerializer.Serialize(response,
+new JsonSerializerOptions
+{
+    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+}
+            ));
+            //return Task.CompletedTask;
+        },
+        OnChallenge = async context =>
+        {
+            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+            context.Response.ContentType = "application/json";
+
+            var response = new
+            {
+                success = false,
+                statusCode = 401,
+                message = "Authentication required. Please provide a valid token."
+            };
+
+            await context.Response.WriteAsync(
+                JsonSerializer.Serialize(ApiResponse.OnFailer("Authentication required. Please provide a valid token.", StatusCodes.Status401Unauthorized), new JsonSerializerOptions
+                {
+                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                })
+            );
         }
     };
 });
@@ -60,7 +109,7 @@ var app = builder.Build();
 
 app.Services.ApplyMigrations();
 
-var allowedOrigins = builder.Configuration.GetSection("Cors:AllowedOrigins").GetChildren().Select(x => x.Value.Trim().TrimEnd('/')).ToArray();
+
 
 app.UseMiddleware<ExceptionHandlingMiddleware>();
 app.UseDefaultFiles();
@@ -72,8 +121,8 @@ if (app.Environment.IsDevelopment())
     app.MapOpenApi();
 }
 
-app.UseHttpsRedirection();
-app.UseCors("AMS");
+//app.UseHttpsRedirection();
+app.UseCors("DigiCors");
 app.UseAuthentication();
 app.UseAuthorization();
 app.MapControllers();
