@@ -15,5 +15,6 @@ namespace DigiCoupon.Application.Interfaces.Services
         public Task<ApiResponse> DeleteAsync(int id);
         public Task<ApiResponse> GetByIdAsync(int id);
         public Task<ApiResponse> GetAllAsync(int restuarantId,int branchId=0);
+        public Task<ApiResponse> GetByRestaurantAsync(int restuarantId);
     }
 }

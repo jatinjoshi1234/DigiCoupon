@@ -13,25 +13,12 @@ import {
 } from "lucide-react";
 
 import styles from "./CustomerPage.module.css";
-import { getCustomers } from "@/app/services/customer.service";
+import {
+  Customer,
+  CustomerRequest,
+  getCustomers,
+} from "@/app/services/customer.service";
 import CustomerFormModal from "./CustomerFormModal";
-
-interface ActivePass {
-  id: number;
-  totalUsage: number;
-  usedUsage: number;
-  remainingUsage: number;
-}
-
-interface Customer {
-  id: number;
-  name: string;
-  restaurantId: number;
-  nickname?: string | null;
-  mobile: string;
-  isActive: boolean;
-  activePass?: ActivePass | null;
-}
 
 export default function CustomerPage() {
   const [customers, setCustomers] = useState<Customer[]>([]);
@@ -49,72 +36,32 @@ export default function CustomerPage() {
    * Replace this with your customer API.
    */
   useEffect(() => {
-    let data: Customer[] = [
-      {
-        id: 1,
-        name: "Rahul Patel",
-        nickname: "Rahul",
-        restaurantId: 9,
-        mobile: "9876543210",
-        isActive: true,
-        activePass: {
-          id: 101,
-          totalUsage: 30,
-          usedUsage: 12,
-          remainingUsage: 18,
-        },
-      },
-      {
-        id: 2,
-        name: "Amit Shah",
-        nickname: "Amit",
-        restaurantId: 9,
-        mobile: "9825212345",
-        isActive: true,
-        activePass: null,
-      },
-      {
-        id: 3,
-        name: "Jay Mehta",
-        nickname: "Jay",
-        mobile: "9898012345",
-        restaurantId: 9,
-        isActive: true,
-        activePass: {
-          id: 102,
-          totalUsage: 15,
-          usedUsage: 8,
-          remainingUsage: 7,
-        },
-      },
-      {
-        id: 4,
-        name: "Karan Joshi",
-        nickname: "Karan",
-        mobile: "9879012345",
-        restaurantId: 9,
-        isActive: true,
-        activePass: {
-          id: 103,
-          totalUsage: 30,
-          usedUsage: 25,
-          remainingUsage: 5,
-        },
-      },
-      {
-        id: 5,
-        name: "Vivek Patel",
-        nickname: "Vicky",
-        mobile: "9909012345",
-        restaurantId: 9,
-        isActive: true,
-        activePass: null,
-      },
-    ];
+    let isMounted = true; // Prevents race conditions if component unmounts quickly
 
-    setCustomers(data);
-    setLoading(false);
+    const fetchData = async () => {
+      try {
+        const data = await loadCustomers(); // Ensure you await the async call
+        if (isMounted) {
+          setCustomers(data);
+          console.log("Customer Page data => ", data);
+          setLoading(false);
+        }
+      } catch (error) {
+        console.error("Failed to load customers:", error);
+        if (isMounted) setLoading(false);
+      }
+    };
+
+    fetchData();
+
+    return () => {
+      isMounted = false; // Cleanup function
+    };
   }, []);
+
+  async function loadCustomers() {
+    return await getCustomers(9);
+  }
 
   const filteredCustomers = useMemo(() => {
     const value = search.trim().toLowerCase();
@@ -126,7 +73,7 @@ export default function CustomerPage() {
     return customers.filter((customer) => {
       return (
         customer.name.toLowerCase().includes(value) ||
-        customer.nickname?.toLowerCase().includes(value) ||
+        customer.nickName?.toLowerCase().includes(value) ||
         customer.mobile.includes(value)
       );
     });
@@ -154,7 +101,7 @@ export default function CustomerPage() {
   }
 
   function handleRedeem(customer: Customer) {
-    if (!customer.activePass) {
+    if (!customer.isActive) {
       return;
     }
 
@@ -167,7 +114,7 @@ export default function CustomerPage() {
     console.log("Redeem customer:", customer);
   }
 
-  async function handleAddCustomer(data: Customer) {
+  async function handleAddCustomer(data: CustomerRequest) {
     try {
       setSaving(true);
 
@@ -218,7 +165,7 @@ export default function CustomerPage() {
         <button
           type="button"
           className={styles.primaryButton}
-          onClick={() => console.log("Add customer")}
+          onClick={() => setShowAddCustomer(true)}
         >
           <Plus size={18} />
           <span>Add Customer</span>
@@ -275,10 +222,10 @@ export default function CustomerPage() {
 
           <div className={styles.customerGrid}>
             {paginatedCustomers.map((customer) => {
-              const pass = customer.activePass;
+              const pass = customer.isActive;
 
               return (
-                <div key={customer.id} className={styles.customerCard}>
+                <div key={customer.customerId} className={styles.customerCard}>
                   {/* Card Header */}
 
                   <div className={styles.cardHeader}>
@@ -290,7 +237,7 @@ export default function CustomerPage() {
                       <div className={styles.customerName}>
                         <h3>{customer.name}</h3>
 
-                        {customer.nickname && <span>{customer.nickname}</span>}
+                        {customer.nickName && <span>{customer.nickName}</span>}
                       </div>
                     </div>
 
@@ -317,7 +264,7 @@ export default function CustomerPage() {
                   {pass ? (
                     <div
                       className={`${styles.passStatus} ${
-                        pass.remainingUsage <= 5
+                        customer.remaining <= 5
                           ? styles.passWarning
                           : styles.passActive
                       }`}
@@ -327,10 +274,10 @@ export default function CustomerPage() {
                       </div>
 
                       <div className={styles.passInfo}>
-                        <strong>{pass.remainingUsage} uses left</strong>
+                        <strong>{customer.usage} uses left</strong>
 
                         <span>
-                          {pass.usedUsage} of {pass.totalUsage} used
+                          {customer.remaining} of {customer.total} used
                         </span>
                       </div>
                     </div>
@@ -359,7 +306,7 @@ export default function CustomerPage() {
                       View Customer
                     </button>
 
-                    {pass && pass.remainingUsage > 0 && (
+                    {customer && customer.remaining > 0 && (
                       <button
                         type="button"
                         className={styles.redeemButton}
@@ -426,7 +373,6 @@ export default function CustomerPage() {
         onClose={() => setShowAddCustomer(false)}
         onSubmit={handleAddCustomer}
       />
-      ;
     </div>
   );
 }

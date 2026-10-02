@@ -2,18 +2,14 @@
 
 import { Fetch } from "@/lib/api";
 
-// export interface Customer {
-//   id: number;
-//   restaurantId: number;
-//   isActive: boolean;
-//   createdOn: string;
-//   firstName: string;
-//   lastName: string;
-//   nickName: string;
-//   mobile: string;
-//   memberCode: string;
-//   publicToken: string;
-// }
+export interface CustomerRequest {
+  id: number;
+  restaurantId: number;
+  firstName: string;
+  lastName: string;
+  nickName: string;
+  mobile: string;
+}
 
 interface ActivePass {
   id: number;
@@ -23,12 +19,15 @@ interface ActivePass {
 }
 
 export interface Customer {
-  id: number;
+  customerId: number;
   name: string;
-  nickname?: string | null;
+  nickName?: string | null;
   mobile: string;
   isActive: boolean;
-  activePass?: ActivePass | null;
+  passId?: number;
+  total: number;
+  usage: number;
+  remaining: number;
 }
 
 const customer = "/customer";

@@ -13,6 +13,6 @@ namespace DigiCoupon.Application.Interfaces.Repositories
         public Task<List<Domain.Entities.Customers>> GetAllAsync(int resuarantId, int branchId = 0);
         public Task<int> UpdateAsync(Domain.Entities.Customers req);
         public Task<bool> DeleteAsync(Domain.Entities.Customers req);
-
+        public Task<IEnumerable<T>> GetCustomerByRestaurant<T>(int id) where T : class;
     }
 }

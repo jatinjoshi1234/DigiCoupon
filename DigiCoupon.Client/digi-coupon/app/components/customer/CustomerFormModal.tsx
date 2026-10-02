@@ -2,14 +2,14 @@
 
 import { FormEvent, useState } from "react";
 import { X, UserPlus } from "lucide-react";
-
-import { Customer } from "../../services/customer.service";
+import styles from "./AddCustomerModal.module.css";
+import { Customer, CustomerRequest } from "../../services/customer.service";
 
 interface CustomerFormModalProps {
   open: boolean;
   loading: boolean;
   onClose: () => void;
-  onSubmit: (data: Customer) => Promise<void>;
+  onSubmit: (data: CustomerRequest) => Promise<void>;
 }
 
 export default function CustomerFormModal({
@@ -19,11 +19,9 @@ export default function CustomerFormModal({
   onSubmit,
 }: CustomerFormModalProps) {
   const [firstName, setfirstName] = useState("");
-  const [lastName, setlastName] = useState("");
+  const [lastName, setLastName] = useState("");
   const [mobile, setMobile] = useState("");
   const [nickname, setNickname] = useState("");
-  const [memberCode, setMemberCode] = useState("");
-  const [publicToken, setPublicToken] = useState("");
 
   if (!open) {
     return null;
@@ -36,84 +34,85 @@ export default function CustomerFormModal({
       return;
     }
 
-    // await onSubmit({
-    //   id: 0,
-    //   isActive: false,
-    //   mobile: mobile.trim(),
-    //   nickname: nickname.trim(),
-    //   //memberCode: memberCode.trim(),
-    //   //publicToken: publicToken,
-    // });
+    await onSubmit({
+      id: 0,
+      firstName: firstName,
+      lastName: lastName,
+      nickName: nickname.trim(),
+      mobile: mobile.trim(),
+      restaurantId: 9,
+    });
 
     setfirstName("");
-    setfirstName("");
+    setLastName("");
     setMobile("");
     setNickname("");
-    setMemberCode("");
-    setPublicToken("");
   }
 
   return (
-    <div className="customer-modal-backdrop" onMouseDown={onClose}>
-      <div className="customer-modal" onMouseDown={(e) => e.stopPropagation()}>
-        {/* Header */}
-        <div className="customer-modal-header">
-          <div className="customer-modal-title">
-            <div className="customer-modal-icon">
-              <UserPlus size={20} />
-            </div>
-
+    <div className={styles.backdrop} onMouseDown={onClose}>
+      {" "}
+      <div className={styles.modal} onMouseDown={(e) => e.stopPropagation()}>
+        {" "}
+        {/* Header */}{" "}
+        <div className={styles.header}>
+          {" "}
+          <div className={styles.title}>
+            {" "}
+            <div className={styles.icon}>
+              {" "}
+              <UserPlus size={20} />{" "}
+            </div>{" "}
             <div>
-              <h3>Add Customer</h3>
-              <p>Create a new restaurant customer.</p>
-            </div>
-          </div>
-
-          <button
-            type="button"
-            className="customer-modal-close"
-            onClick={onClose}
-          >
-            <X size={20} />
-          </button>
-        </div>
-
-        {/* Form */}
+              {" "}
+              <h3>Add Customer</h3>{" "}
+              <p>Create a new restaurant customer.</p>{" "}
+            </div>{" "}
+          </div>{" "}
+          <button type="button" className={styles.close} onClick={onClose}>
+            {" "}
+            <X size={20} />{" "}
+          </button>{" "}
+        </div>{" "}
+        {/* Form */}{" "}
         <form onSubmit={handleSubmit}>
-          <div className="customer-form-body">
-            <div className="customer-form-group">
+          {" "}
+          <div className={styles.formBody}>
+            {" "}
+            <div className={styles.formGroup}>
+              {" "}
               <label>
-                First Name <span>*</span>
-              </label>
-
+                {" "}
+                First Name <span>*</span>{" "}
+              </label>{" "}
               <input
                 type="text"
                 placeholder="Enter customer first name"
                 value={firstName}
                 onChange={(e) => setfirstName(e.target.value)}
                 required
-              />
-            </div>
-
-            <div className="customer-form-group">
+              />{" "}
+            </div>{" "}
+            <div className={styles.formGroup}>
+              {" "}
               <label>
-                Last Name <span>*</span>
-              </label>
-
+                {" "}
+                Last Name <span>*</span>{" "}
+              </label>{" "}
               <input
                 type="text"
                 placeholder="Enter customer last name"
                 value={lastName}
-                onChange={(e) => setlastName(e.target.value)}
+                onChange={(e) => setLastName(e.target.value)}
                 required
-              />
-            </div>
-
-            <div className="customer-form-group">
+              />{" "}
+            </div>{" "}
+            <div className={styles.formGroup}>
+              {" "}
               <label>
-                Mobile Number <span>*</span>
-              </label>
-
+                {" "}
+                Mobile Number <span>*</span>{" "}
+              </label>{" "}
               <input
                 type="tel"
                 inputMode="numeric"
@@ -122,43 +121,42 @@ export default function CustomerFormModal({
                 value={mobile}
                 onChange={(e) => setMobile(e.target.value.replace(/\D/g, ""))}
                 required
-              />
-            </div>
-
-            <div className="customer-form-row">
-              <div className="customer-form-group">
-                <label>Nickname</label>
-                <input
-                  type="text"
-                  placeholder="Optional"
-                  value={nickname}
-                  onChange={(e) => setNickname(e.target.value)}
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Footer */}
-          <div className="customer-modal-footer">
+              />{" "}
+            </div>{" "}
+            <div className={styles.formGroup}>
+              {" "}
+              <label>Nickname</label>{" "}
+              <input
+                type="text"
+                placeholder="Optional"
+                value={nickname}
+                onChange={(e) => setNickname(e.target.value)}
+              />{" "}
+            </div>{" "}
+          </div>{" "}
+          {/* Footer */}{" "}
+          <div className={styles.footer}>
+            {" "}
             <button
               type="button"
-              className="dc-secondary-button"
+              className={styles.secondaryButton}
               onClick={onClose}
               disabled={loading}
             >
-              Cancel
-            </button>
-
+              {" "}
+              Cancel{" "}
+            </button>{" "}
             <button
               type="submit"
-              className="dc-primary-button"
+              className={styles.primaryButton}
               disabled={loading}
             >
-              {loading ? "Creating..." : "Create Customer"}
-            </button>
-          </div>
-        </form>
-      </div>
+              {" "}
+              {loading ? "Creating..." : "Create Customer"}{" "}
+            </button>{" "}
+          </div>{" "}
+        </form>{" "}
+      </div>{" "}
     </div>
   );
 }

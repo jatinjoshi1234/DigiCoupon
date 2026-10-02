@@ -28,6 +28,12 @@ namespace DigiCoupon.Infrastructure.Persistence.Contexts
             return await connection.QueryAsync<T>(query, param);
         }
 
+        public async Task<IEnumerable<T>?> ExecuteAsync<T>(string query, object? param = null)
+        {
+            using var connection = CreateConnection();
+            return await connection.QueryAsync<T>(query, param,null,null,CommandType.StoredProcedure);
+        }
+
         public async Task<T?> SingleAsync<T>(string query, object? param = null, CommandType type = CommandType.StoredProcedure)
         {
             using var connection = CreateConnection();

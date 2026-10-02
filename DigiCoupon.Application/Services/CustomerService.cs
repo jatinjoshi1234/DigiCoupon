@@ -72,6 +72,16 @@ namespace DigiCoupon.Application.Services
             return ApiResponse.OnSuccess("Record loaded successfully.", customer.Select(x => MapDto(x)).ToList());
         }
 
+        public async Task<ApiResponse> GetByRestaurantAsync(int restuarantId)
+        {
+            IEnumerable<CustomerVM> customer = await context.GetCustomerByRestaurant<CustomerVM>(restuarantId);
+
+            if (customer == null || customer.Count() <= 0)
+                return ApiResponse.OnFailer($"Record not found.");
+
+            return ApiResponse.OnSuccess("Record loaded successfully.", customer);
+        }
+
         private Customers MapDto(CustomerRequestDto request)
         {
             var Customer = new Customers()
@@ -83,16 +93,16 @@ namespace DigiCoupon.Application.Services
                 LastName = request.LastName,
                 NickName = request.NickName,
                 Mobile = request.Mobile,
-                MemberCode = request.MemberCode,
-                PublicToken = request.PublicToken,
-                IsActive = request.IsActive
+                //MemberCode = request.MemberCode,
+                //PublicToken = request.PublicToken,
+                //IsActive = request.IsActive
             };
             return Customer;
         }
 
         private CustomerRequestDto MapDto(Customers obj)
         {
-            return new CustomerRequestDto(obj.Id,obj.RestaurantId, obj.RestaurantBranchId, obj.FirstName, obj.LastName, obj.NickName, obj.Mobile, obj.MemberCode, obj.PublicToken,obj.CreatedOn, obj.IsActive);
+            return new CustomerRequestDto(obj.Id,obj.RestaurantId, obj.RestaurantBranchId, obj.FirstName, obj.LastName, obj.NickName, obj.Mobile);
         }
     }
 }

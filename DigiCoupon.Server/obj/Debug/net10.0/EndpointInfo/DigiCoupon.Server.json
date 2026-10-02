@@ -1060,11 +1060,7 @@
           "firstName",
           "lastName",
           "nickName",
-          "mobile",
-          "memberCode",
-          "publicToken",
-          "createOn",
-          "isActive"
+          "mobile"
         ],
         "type": "object",
         "properties": {
@@ -1110,19 +1106,6 @@
           },
           "mobile": {
             "type": "string"
-          },
-          "memberCode": {
-            "type": "string"
-          },
-          "publicToken": {
-            "type": "string"
-          },
-          "createOn": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "isActive": {
-            "type": "boolean"
           }
         }
       },

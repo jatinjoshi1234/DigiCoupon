@@ -1,6 +1,8 @@
 ﻿using DigiCoupon.Application.Interfaces.Repositories;
 using DigiCoupon.Domain.Entities;
 using DigiCoupon.Infrastructure.Persistence.Contexts;
+using DigiCoupon.Infrastructure.Persistence.Interfaces;
+using DigiCoupon.Infrastructure.Persistence.StoreProcedures;
 
 using System;
 using System.Collections.Generic;
@@ -12,7 +14,7 @@ using static Dapper.SqlMapper;
 
 namespace DigiCoupon.Infrastructure.Persistence.Repositories
 {
-    internal class Customers(IBase context) : ICustomers
+    internal class Customers(IBase context, IDapperContext fetch) : ICustomers
     {
         public async Task<int> AddAsync(Domain.Entities.Customers req)
         {
@@ -36,6 +38,11 @@ namespace DigiCoupon.Infrastructure.Persistence.Repositories
             Expression<Func<Domain.Entities.Customers, bool>> predict = branchId > 0 ? x => x.RestaurantId == resuarantId && x.RestaurantBranchId == branchId : x => x.RestaurantId == resuarantId;
             return await context.GetAsync<Domain.Entities.Customers>(predict);
         }
+
+        public async Task<IEnumerable<T>> GetCustomerByRestaurant<T>(int id) where T : class
+        {
+            return await fetch.ExecuteAsync<T>(CustomerProcedure.ProcName, new{ RestuarantId = id });
+        } 
 
         public async Task<int> UpdateAsync(Domain.Entities.Customers req)
         {

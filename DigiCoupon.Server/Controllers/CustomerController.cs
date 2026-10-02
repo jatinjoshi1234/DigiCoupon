@@ -24,7 +24,7 @@ namespace DigiCoupon.Server.Controllers
         [HttpGet("all/{restuarantId}/{branchId?}")]
         public async Task<IActionResult> Get(int restuarantId, int? branchId = 0)
         {
-            var result = await service.GetAllAsync(restuarantId, branchId ?? 0);
+            var result = await service.GetByRestaurantAsync(restuarantId);
             return Ok(result);
         }
 
