@@ -15,6 +15,8 @@ import {
   X,
 } from "lucide-react";
 
+import { useAuth } from "@/app/context/AuthContext";
+
 interface SidebarProps {
   isOpen: boolean;
   onClose: () => void;
@@ -33,19 +35,19 @@ const menuItems = [
   },
   {
     title: "Passes",
-    href: "/passes",
+    href: "/coupons",
     icon: Ticket,
   },
-  {
-    title: "Redemptions",
-    href: "/redemptions",
-    icon: ScanLine,
-  },
-  {
-    title: "Branches",
-    href: "/branches",
-    icon: Store,
-  },
+  // {
+  //   title: "Redemptions",
+  //   href: "/redemptions",
+  //   icon: ScanLine,
+  // },
+  // {
+  //   title: "Branches",
+  //   href: "/branches",
+  //   icon: Store,
+  // },
   {
     title: "Reports",
     href: "/reports",
@@ -55,6 +57,7 @@ const menuItems = [
 
 export default function Sidebar({ isOpen, onClose }: SidebarProps) {
   const pathname = usePathname();
+  const { logout } = useAuth();
 
   return (
     <aside className={`app-sidebar ${isOpen ? "sidebar-open" : ""}`}>
@@ -103,11 +106,10 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
         <div className="sidebar-section-title system-title">SYSTEM</div>
 
         <Link
-          href="/settings"
+          href="/profile"
           onClick={onClose}
-          className={`sidebar-link ${
-            pathname.startsWith("/settings") ? "active" : ""
-          }`}
+          className={`sidebar-link ${pathname.startsWith("/profile") ? "active" : ""
+            }`}
         >
           <Settings size={19} />
 
@@ -117,7 +119,14 @@ export default function Sidebar({ isOpen, onClose }: SidebarProps) {
 
       {/* Bottom */}
       <div className="sidebar-bottom">
-        <button type="button" className="sidebar-link logout-button">
+        <button
+          type="button"
+          className="sidebar-link logout-button"
+          onClick={() => {
+            onClose();
+            logout();
+          }}
+        >
           <LogOut size={19} />
 
           <span>Logout</span>

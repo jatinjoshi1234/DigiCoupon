@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DigiCoupon.Infrastructure")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+8059938ce5125f61362f2a2c905c232b04409443")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca7196e01a441b1296000094ad373032fa7b015a")]
 [assembly: System.Reflection.AssemblyProductAttribute("DigiCoupon.Infrastructure")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DigiCoupon.Infrastructure")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

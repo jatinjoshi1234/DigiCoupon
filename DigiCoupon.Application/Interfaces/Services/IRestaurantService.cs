@@ -1,4 +1,4 @@
-﻿using DigiCoupon.Application.DTO;
+using DigiCoupon.Application.DTO;
 using DigiCoupon.Domain.Entities;
 
 using System;
@@ -15,6 +15,7 @@ namespace DigiCoupon.Application.Interfaces.Services
         public Task<ApiResponse> DeleteAsync(int id);
         public Task<ApiResponse> GetByIdAsync(int id);
         public Task<RestuarantRequestDto> GetByUserAsync(int id);
+        public Task<ApiResponse> GetCurrentAsync();
         public Task<bool> Exists(int userId);
     }
 }

@@ -59,43 +59,29 @@ builder.Services.AddAuthentication(options =>
 
     options.Events = new JwtBearerEvents
     {
-        OnAuthenticationFailed = async context =>
+        OnAuthenticationFailed = context =>
         {
-            Console.WriteLine(
-                $"JWT ERROR: {context.Exception.Message}");
-
-            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            context.Response.ContentType = "application/json";
-
-            var response = ApiResponse.OnFailer("Authentication required. Please provide a valid token.", StatusCodes.Status401Unauthorized);
-
-            await context.Response.WriteAsync(
-                JsonSerializer.Serialize(response,
-new JsonSerializerOptions
-{
-    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-}
-            ));
-            //return Task.CompletedTask;
+            Console.WriteLine($"JWT ERROR: {context.Exception.Message}");
+            return Task.CompletedTask;
         },
         OnChallenge = async context =>
         {
-            context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-            context.Response.ContentType = "application/json";
+            context.HandleResponse();
 
-            var response = new
+            if (!context.Response.HasStarted)
             {
-                success = false,
-                statusCode = 401,
-                message = "Authentication required. Please provide a valid token."
-            };
+                context.Response.StatusCode = StatusCodes.Status401Unauthorized;
+                context.Response.ContentType = "application/json";
 
-            await context.Response.WriteAsync(
-                JsonSerializer.Serialize(ApiResponse.OnFailer("Authentication required. Please provide a valid token.", StatusCodes.Status401Unauthorized), new JsonSerializerOptions
-                {
-                    PropertyNamingPolicy = JsonNamingPolicy.CamelCase
-                })
-            );
+                var response = ApiResponse.OnFailer("Authentication required. Please provide a valid token.", StatusCodes.Status401Unauthorized);
+
+                await context.Response.WriteAsync(
+                    JsonSerializer.Serialize(response, new JsonSerializerOptions
+                    {
+                        PropertyNamingPolicy = JsonNamingPolicy.CamelCase
+                    })
+                );
+            }
         }
     };
 });

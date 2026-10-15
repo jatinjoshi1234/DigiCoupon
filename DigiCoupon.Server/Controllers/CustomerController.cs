@@ -5,6 +5,8 @@ using DigiCoupon.Application.Interfaces.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
+using System.Text.Json;
+
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace DigiCoupon.Server.Controllers
@@ -21,18 +23,33 @@ namespace DigiCoupon.Server.Controllers
             return Ok(result);
         }
 
-        [HttpGet("all/{restuarantId}/{branchId?}")]
+        [HttpGet("all/{restuarantId}")]
         public async Task<IActionResult> Get(int restuarantId, int? branchId = 0)
         {
             var result = await service.GetByRestaurantAsync(restuarantId);
             return Ok(result);
         }
 
+        [HttpGet("statictics/{restuarantId}")]
+        public async Task<IActionResult> GetCountAsync(int restuarantId)
+        {
+            var result = await service.GetReports(restuarantId);
+            return Ok(ApiResponse.OnSuccess("Report data loaded successfully.",result));
+        }
+
+        [HttpPost("paged_data")]
+        public async Task<IActionResult> PagedData(PaginationRequest args)
+        {
+            var result = await service.GetAllAsync(args);
+            return Ok(ApiResponse.OnSuccess("Loaded successfully", result));
+        }
+
         // POST api/<RestuarantController>
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] CustomerRequestDto args)
         {
-            var res = await service.AddAsync(args);
+            ApiResponse res = await service.AddAsync(args);
+            Console.WriteLine($" Response => {JsonSerializer.Serialize(res)}");
             return Ok(res);
         }
 

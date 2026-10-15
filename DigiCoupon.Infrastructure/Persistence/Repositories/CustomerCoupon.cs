@@ -1,6 +1,11 @@
-﻿using DigiCoupon.Application.Interfaces.Repositories;
+﻿using Dapper;
+
+using DigiCoupon.Application.Interfaces.Repositories;
 using DigiCoupon.Domain.Entities;
+using DigiCoupon.Infrastructure.Extensions;
 using DigiCoupon.Infrastructure.Persistence.Contexts;
+using DigiCoupon.Infrastructure.Persistence.Interfaces;
+using DigiCoupon.Infrastructure.Persistence.StoreProcedures;
 
 using Microsoft.EntityFrameworkCore;
 
@@ -14,7 +19,7 @@ using static Dapper.SqlMapper;
 
 namespace DigiCoupon.Infrastructure.Persistence.Repositories
 {
-    internal class CustomerCoupon(IBase context) : ICustomerCoupon
+    internal class CustomerCoupon(IBase context, IDapperContext fetch) : ICustomerCoupon
     {
         public async Task<int> AddAsync(Domain.Entities.CustomerCoupon req)
         {
@@ -41,6 +46,13 @@ namespace DigiCoupon.Infrastructure.Persistence.Repositories
         {
             return await context.GetByIdAsync<Domain.Entities.CustomerCoupon>(args,q=>q.Include(args2)) ?? null!;
         }
+        public async Task<(int, List<T>)> GetPagedData<T, T1>(T1 args) where T : class where T1 : class
+        {
+            return await fetch.QueryMultipleAsync<int, T>(CustomerProcedure.ProcName, args.ToDynamicParameters<T1>());
+        }
+
+
+        
 
         public async Task<List<Domain.Entities.CustomerCoupon>> GetAllAsync(int customerId)
         {

@@ -1,4 +1,4 @@
-﻿using DigiCoupon.Application.DTO;
+using DigiCoupon.Application.DTO;
 using DigiCoupon.Application.Interfaces.Auth;
 using DigiCoupon.Application.Interfaces.Repositories;
 using DigiCoupon.Application.Interfaces.Services;
@@ -16,7 +16,7 @@ namespace DigiCoupon.Application.Services
     {
         public async Task<ApiResponse> AddAsync(CouponRedemptionRequestDto request)
         {
-            if (await context.AnyAsync(x => x.CustomerCouponId == request.CustomerCouponId && DateTime.Now.Date < request.RedemptionDate.Date))
+            if (DateTime.Now.Date < request.RedemptionDate.Date)
                 return ApiResponse.OnFailer($"You can not redemption future date pass.");
 
             int count = await context.CountAsync(x => x.CustomerCouponId == request.CustomerCouponId && (x.RedemptionDate.Date == request.RedemptionDate.Date));
@@ -35,10 +35,10 @@ namespace DigiCoupon.Application.Services
 
             var coupon = await couponService.GetByIdGenericAsync(request.CustomerCouponId);
 
-            if (coupon.Status && coupon.Data != null && coupon.Data.RemainingCoupon <= 0)
-            {
-                return ApiResponse.OnFailer("Coupon diary is over you can not redeem coupon, buy new diary.");
-            }
+            //if (coupon.Status && coupon.Data != null && coupon.Data.RemainingCoupon <= 0)
+            //{
+            //    return ApiResponse.OnFailer("Coupon diary is over you can not redeem coupon, buy new diary.");
+            //}
 
             var result = await context.AddAsync(MapDto(request));
             return result > 0 ? ApiResponse.OnSuccess("Redord added successfully.") : ApiResponse.OnFailer("Enter details are invalid. Please enter correct details");
@@ -108,7 +108,8 @@ namespace DigiCoupon.Application.Services
         {
             var Customer = new CouponRedemption()
             {
-                RestaurantBranchId = request.RestaurantBranchId,
+                //RestaurantBranchId = 0,
+                Quantity = request.Quantity,
                 CustomerCouponId = request.CustomerCouponId,
                 RedemptionDate = request.RedemptionDate
             };
@@ -117,7 +118,7 @@ namespace DigiCoupon.Application.Services
 
         private CouponRedemptionRequestDto MapDto(CouponRedemption obj)
         {
-            return new CouponRedemptionRequestDto(obj.Id, obj.RestaurantBranchId, obj.CustomerCouponId, obj.RedemptionDate);
+            return new CouponRedemptionRequestDto(obj.Id, obj.CustomerCouponId,obj.Quantity ,obj.RedemptionDate);
         }
     }
 }

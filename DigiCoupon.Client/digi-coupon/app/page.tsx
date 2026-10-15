@@ -1,28 +1,44 @@
 "use client";
-
-import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Customer, getCustomers } from "./services/customer.service";
-
-import { logout } from "./services/auth.service";
-import { useRouter } from "next/navigation";
 import { DashboardData, getDashboard } from "./services/dashboard.service";
+import { useAuth } from "./context/AuthContext";
 
 export default function Home() {
+  const {
+    restaurant,
+    restaurantId,
+    isLoading: authLoading,
+    updateRestaurant,
+  } = useAuth();
   const [dashboard, setDashboard] = useState<DashboardData | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+
   useEffect(() => {
-    loadDashboard();
-  }, []);
+    if (!authLoading) {
+      loadDashboard();
+    }
+  }, [restaurantId, authLoading]);
+
   async function loadDashboard() {
     try {
       setLoading(true);
       setError("");
-      const data = await getDashboard();
-      console.log("page => response => ", data);
-      data.recentRedemptions = JSON.parse(data.recentRedemptionsJson);
-      setDashboard(data);
+      const res = await getDashboard(restaurantId);
+      console.log("dashboard => response => ", res);
+      if (res.status) {
+        const data = res.data;
+        setDashboard(data);
+        if (
+          data?.restaurantName &&
+          isNaN(Number(data.restaurantName)) &&
+          (!restaurant?.name || !isNaN(Number(restaurant.name)))
+        ) {
+          updateRestaurant({ name: data.restaurantName });
+        }
+      } else {
+        setError(res.message);
+      }
     } catch (error) {
       console.error("Dashboard API error:", error);
       setError(
@@ -146,7 +162,7 @@ export default function Home() {
             </div>{" "}
             <a href="/redemption"> View all → </a>{" "}
           </div>{" "}
-          {dashboard.recentRedemptions.length === 0 ? (
+          {dashboard.recentRedemption.length === 0 ? (
             <div className="dashboard-empty">
               {" "}
               <div className="empty-icon"> 🎫 </div> <h3>No redemptions yet</h3>{" "}
@@ -155,7 +171,7 @@ export default function Home() {
           ) : (
             <div className="redemption-list">
               {" "}
-              {dashboard.recentRedemptions.slice(0, 5).map((item, index) => (
+              {dashboard.recentRedemption.slice(0, 5).map((item, index) => (
                 <div
                   className="redemption-item"
                   key={`${item.couponNumber}-${index}`}
@@ -168,7 +184,7 @@ export default function Home() {
                   <div className="customer-info">
                     {" "}
                     <strong> {item.customer} </strong>{" "}
-                    <span> {item.mobile} </span>{" "}
+                    <span> {item.fromDate} </span>{" "}
                   </div>{" "}
                   <div className="redemption-coupon">
                     {" "}

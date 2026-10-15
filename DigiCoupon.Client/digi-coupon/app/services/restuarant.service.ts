@@ -10,8 +10,6 @@ export interface Customer {
   MemberCode: string;
   PublicToken: string;
 }
-export async function createRestuarant(
-  body: any,
-): Promise<ApiResponse<number>> {
-  return Fetch<ApiResponse<number>>("/restuarant", body);
+export async function createRestuarant(body: any): Promise<ApiResponse> {
+  return Fetch("/restuarant", body);
 }

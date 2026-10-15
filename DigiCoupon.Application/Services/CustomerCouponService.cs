@@ -1,4 +1,4 @@
-﻿using DigiCoupon.Application.DTO;
+using DigiCoupon.Application.DTO;
 using DigiCoupon.Application.Interfaces.Auth;
 using DigiCoupon.Application.Interfaces.Repositories;
 using DigiCoupon.Application.Interfaces.Services;
@@ -7,6 +7,7 @@ using DigiCoupon.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq.Expressions;
+using System.Security.Cryptography;
 using System.Text;
 using System.Xml.Linq;
 
@@ -17,18 +18,18 @@ namespace DigiCoupon.Application.Services
 
         public async Task<ApiResponse> AddAsync(CustomerCouponRequestDto request)
         {
-            var currentDate = DateTime.Now;
-            bool isExists = await context.AnyAsync(x => x.CustomerId == request.CustomerId && currentDate >= x.StartDate && currentDate <= x.EndDate && x.IsExpired == false);
+            var currentDate = DateTime.Now.Date;
+            bool isExists = await context.AnyAsync(x => x.CustomerId == request.CustomerId && currentDate >= x.StartDate.Date && currentDate <= x.EndDate.Date && x.IsExpired == false);
 
             if (isExists)
                 return ApiResponse.OnFailer($"customer have allready active coupon.");
 
-            isExists = await context.AnyAsync(x => x.CustomerId == request.CustomerId && x.IsExpired == false && (request.StartDate >= x.StartDate && request.EndDate <= x.EndDate) && request.StartDate <= x.EndDate);
+            isExists = await context.AnyAsync(x => x.CustomerId == request.CustomerId && x.IsExpired == false && (request.StartDate.Date >= x.StartDate.Date && request.EndDate.Date <= x.EndDate.Date) && request.StartDate.Date <= x.EndDate.Date);
 
             if (isExists)
-                return ApiResponse.OnFailer($"customer have allready active coupon between {request.StartDate} and {request.StartDate}.");
+                return ApiResponse.OnFailer($"customer have allready active coupon between {request.StartDate:dd/MM/yyyy} and {request.EndDate:dd/MM/yyyy}.");
 
-            if (request.StartDate < currentDate)
+            if (request.StartDate.Date < currentDate)
                 return ApiResponse.OnFailer($"Start date must be current or future date.");
 
             var result = await context.AddAsync(MapDto(request));
@@ -36,14 +37,42 @@ namespace DigiCoupon.Application.Services
             return isAdded ? ApiResponse.OnSuccess("Redord added successfully.") : ApiResponse.OnSuccess("Enter details are invalid. Please enter correct details");
         }
 
+        public async Task<PaginationResponse<CustomerVM>> GetAllAsync(PaginationRequest args)
+        {
+            (int, List<CustomerVM>) result = await context.GetPagedData<CustomerVM, PaginationRequest>(args);
+
+            PaginationResponse<CustomerVM> response = new PaginationResponse<CustomerVM>
+            {
+                Items = result.Item2,
+                TotalRecords = result.Item1,
+                Page = args.Page,
+                PageSize = args.PageSize,
+            };
+            return response;
+        }
+
+        public async Task<PaginationResponse<CustomerVM>> GetAllAsync(PaginationRequest args,DateTime from,DateTime to)
+        {
+            (int, List<CustomerVM>) result = await context.GetPagedData<CustomerVM, PaginationRequest>(args);
+
+            PaginationResponse<CustomerVM> response = new PaginationResponse<CustomerVM>
+            {
+                Items = result.Item2,
+                TotalRecords = result.Item1,
+                Page = args.Page,
+                PageSize = args.PageSize,
+            };
+            return response;
+        }
+
         public async Task<bool> IsExpired(int customerCouponId, DateTime RedemptionDate)
         {
-            return await context.AnyAsync(x => x.Id == customerCouponId && RedemptionDate.Date >= x.StartDate && RedemptionDate.Date <= x.EndDate.Date && x.IsExpired == true);
+            return await context.AnyAsync(x => x.Id == customerCouponId && RedemptionDate.Date >= x.StartDate.Date && RedemptionDate.Date <= x.EndDate.Date && x.IsExpired == true);
         }
 
         public async Task<bool> IsExist(int customerCouponId, DateTime RedemptionDate)
         {
-            return await context.AnyAsync(x => x.Id == customerCouponId && RedemptionDate.Date >= x.StartDate && RedemptionDate.Date <= x.EndDate.Date);
+            return await context.AnyAsync(x => x.Id == customerCouponId && RedemptionDate.Date >= x.StartDate.Date && RedemptionDate.Date <= x.EndDate.Date);
         }
 
         public async Task<bool> IsActive(int customerCouponId)
@@ -118,9 +147,9 @@ namespace DigiCoupon.Application.Services
             var Customer = new CustomerCoupon()
             {
                 Id = request.Id,
-                RestaurantBranchId = request.RestaurantBranchId,
+                //RestaurantBranchId = request.RestaurantBranchId,
                 CustomerId = request.CustomerId,
-                CouponNumber = request.CouponNumber,
+                CouponNumber = $"{RandomNumberGenerator.GetInt32(100000, 999999).ToString()}",
                 CouponType = request.CouponType,
                 Price = request.Price,
                 StartDate = request.StartDate,
@@ -135,7 +164,7 @@ namespace DigiCoupon.Application.Services
             int totalPass = Convert.ToInt32((obj.EndDate - obj.StartDate).TotalDays) + 1;
             int usagePass = obj.Redemptions.Count(x => !x.IsDeleted && x.RedemptionDate.Month == DateTime.Now.Month);
             int remainingPass = totalPass - usagePass;
-            return new CustomerCouponRequestDto(obj.Id, obj.RestaurantBranchId, obj.CustomerId, obj.CouponNumber, obj.CouponType, obj.Price, obj.StartDate, obj.EndDate, totalPass, usagePass, remainingPass);
+            return new CustomerCouponRequestDto(obj.Id, obj.CustomerId, obj.CouponType, obj.Price, obj.StartDate, obj.EndDate);
         }
     }
 }

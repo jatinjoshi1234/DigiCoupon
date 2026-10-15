@@ -709,3 +709,253 @@
     height: 34px;
   }
 }
+
+.customerActions {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  margin-left: auto;
+}
+
+.viewButton,
+.deleteButton {
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9px;
+
+  background: #ffffff;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+
+/* View */
+
+.viewButton {
+  border: 1px solid #e2e8f0;
+  color: #64748b;
+}
+
+.viewButton:hover {
+  border-color: #cbd5e1;
+
+  background: #f8fafc;
+  color: #f97316;
+
+  transform: translateY(-1px);
+}
+
+
+/* Delete */
+
+.deleteButton {
+  border: 1px solid #fee2e2;
+  color: #ef4444;
+
+  background: #fffafa;
+}
+
+.deleteButton:hover {
+  border-color: #fecaca;
+
+  background: #fef2f2;
+  color: #dc2626;
+
+  transform: translateY(-1px);
+}
+
+
+/* Mobile */
+
+@media (max-width: 600px) {
+  .customerActions {
+    gap: 5px;
+  }
+
+  .viewButton,
+  .deleteButton {
+    width: 34px;
+    height: 34px;
+  }
+}
+
+/* =========================================
+   More Menu
+========================================= */
+
+.moreMenuWrapper {
+  position: relative;
+  margin-left: auto;
+}
+
+.moreButton {
+
+  width: 36px;
+  height: 36px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 9px;
+
+  background: #ffffff;
+  color: #64748b;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+
+.moreButton:hover {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+  color: #f97316;
+}
+
+.moreMenu {
+  position: absolute;
+  top: calc(100% + 7px);
+  right: 0;
+
+  z-index: 50;
+
+  width: 190px;
+  padding: 6px;
+
+  background: #ffffff;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 10px;
+
+  box-shadow:
+    0 10px 25px rgba(15, 23, 42, 0.12),
+    0 3px 8px rgba(15, 23, 42, 0.06);
+}
+
+.menuItem {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  padding: 10px 11px;
+
+  border: none;
+  border-radius: 7px;
+
+  background: transparent;
+  color: #475569;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  text-align: left;
+  cursor: pointer;
+
+  transition:
+    background 0.15s ease,
+    color 0.15s ease;
+}
+
+.menuItem:hover {
+  background: #f8fafc;
+  color: #f97316;
+}
+
+.menuItem svg {
+  flex-shrink: 0;
+}
+
+.deleteMenuItem {
+  color: #ef4444;
+}
+
+.deleteMenuItem:hover {
+  background: #fef2f2;
+  color: #dc2626;
+}
+
+
+/* =========================================
+   Redeem Button
+========================================= */
+
+.cardActions {
+  display: flex;
+  margin-top: 14px;
+}
+
+.redeemButton {
+  width: 100%;
+  min-height: 42px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+
+  border: none;
+  border-radius: 9px;
+
+  background: #f97316;
+  color: #ffffff;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    transform 0.15s ease,
+    box-shadow 0.2s ease;
+}
+
+.redeemButton:hover {
+  background: #ea580c;
+  transform: translateY(-1px);
+
+  box-shadow: 0 4px 10px rgba(249, 115, 22, 0.2);
+}
+
+.redeemButton:active {
+  transform: translateY(0);
+}
+
+
+/* =========================================
+   Mobile
+========================================= */
+
+@media (max-width: 600px) {
+  .moreButton {
+    width: 34px;
+    height: 34px;
+  }
+
+  .moreMenu {
+    width: 180px;
+  }
+
+  .redeemButton {
+    min-height: 44px;
+  }
+}

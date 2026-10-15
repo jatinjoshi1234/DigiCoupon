@@ -1,4 +1,4 @@
-﻿using DigiCoupon.Infrastructure.Persistence.StoreProcedures;
+using DigiCoupon.Infrastructure.Persistence.StoreProcedures;
 
 using Microsoft.EntityFrameworkCore.Migrations;
 
@@ -12,7 +12,7 @@ namespace DigiCoupon.Infrastructure.Persistence.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.Sql(DashboardProcedure.GetDashboardData);
+            // Dashboard procedure updated with quantity in RedemptionQuantity migration
         }
 
         /// <inheritdoc />

@@ -1,5 +1,6 @@
 ﻿using Dapper;
 
+using DigiCoupon.Application.DTO;
 using DigiCoupon.Infrastructure.Persistence.Interfaces;
 
 using Microsoft.Data.SqlClient;
@@ -9,6 +10,9 @@ using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Text;
+
+using static Dapper.SqlMapper;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace DigiCoupon.Infrastructure.Persistence.Contexts
 {
@@ -38,6 +42,22 @@ namespace DigiCoupon.Infrastructure.Persistence.Contexts
         {
             using var connection = CreateConnection();
             return await connection.QuerySingleOrDefaultAsync<T>(query, param, null, null, type) ?? default!;
+        }
+
+        public async Task<(T1,List<T2>)> QueryMultipleAsync<T1,T2>(string query, DynamicParameters param)
+        {
+            using var connection = CreateConnection();
+            var result = await connection.QueryMultipleAsync(query, param, commandType: CommandType.StoredProcedure);
+            T1 totalRecord = await result.ReadFirstAsync<T1>();
+            List<T2> data = (await result.ReadAsync<T2>()).ToList();
+            return (totalRecord, data);
+        }
+
+        public async Task<List<T2>> QueryAsync<T2>(string query)
+        {
+            using var connection = CreateConnection();
+            var result = await connection.QueryAsync<T2>(query,commandType: CommandType.Text);
+            return result.ToList<T2>();
         }
 
         public async Task<T?> ExecuteScallerAsync<T>(string query, object? param = null, CommandType type = CommandType.StoredProcedure)

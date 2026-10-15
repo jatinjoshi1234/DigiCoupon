@@ -71,6 +71,8 @@ namespace DigiCoupon.Infrastructure.Persistence.Contexts
                 {
                     entry.Entity.ModifiedOn = DateTime.Now;
                     entry.Entity.ModifiedBy = _userContext.UserId;
+                    entry.Property(x => x.UserId).IsModified = false;
+                    entry.Property(x => x.CreatedOn).IsModified = false;
                 }
                 if (entry.State == EntityState.Deleted)
                 {

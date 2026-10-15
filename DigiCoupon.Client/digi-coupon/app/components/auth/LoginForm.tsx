@@ -3,11 +3,11 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { login } from "../../services/auth.service";
-import { setAuth, setToken } from "@/lib/auth";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function LoginForm() {
   const router = useRouter();
+  const { login } = useAuth();
 
   const [mobileNo, setMobileNo] = useState("");
   const [password, setPassword] = useState("");
@@ -23,7 +23,7 @@ export default function LoginForm() {
 
     // Basic validation
     if (!mobileNo.trim()) {
-      setError("Please enter your email.");
+      setError("Please enter your email or username.");
       return;
     }
 
@@ -35,40 +35,25 @@ export default function LoginForm() {
     try {
       setLoading(true);
 
-      const data = {
+      const { isRestaurantCreated } = await login({
         UserName: mobileNo.trim(),
         Password: password,
-      };
-      console.log("data => ", data);
-      const url = `${process.env.NEXT_PUBLIC_API_URL}/auth/login`;
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          UserName: mobileNo.trim(),
-          Password: password,
-        }),
       });
 
-      const result = await response.json();
-      console.log("login component response => ", result);
-      if (!response.ok || !result.status) {
-        throw new Error(result.message || "Unable to login.");
-      }
-      if (!result.data.isRestuarantCreated) {
-        router.push("/restuarant/create");
+      console.log("Login success! isRestaurantCreated:", isRestaurantCreated);
+
+      if (!isRestaurantCreated) {
+        router.replace("/restuarant/create");
         return;
       }
-      router.push("/");
+
+      router.replace("/");
     } catch (error) {
       setError(
         error instanceof Error
           ? error.message
           : "Unable to login. Please try again.",
       );
-    } finally {
       setLoading(false);
     }
   };

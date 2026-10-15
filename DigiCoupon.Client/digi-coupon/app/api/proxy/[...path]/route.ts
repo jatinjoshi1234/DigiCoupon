@@ -6,7 +6,6 @@ async function handler(
   request: NextRequest,
   { params }: { params: Promise<{ path: string[] }> },
 ) {
-  console.log("🔥 PROXY ROUTE HIT");
   try {
     if (!API_URL) {
       return NextResponse.json(
@@ -37,15 +36,8 @@ async function handler(
     const targetUrl = `${API_URL}/${path.join("/")}`;
 
     const headers = new Headers(request.headers);
-    console.log("========== API PROXY ==========");
-    console.log("Path:", path.join("/"));
-    console.log("Cookie exists:", !!token);
-    console.log("Token length:", token?.length);
-    console.log("================================");
-
     headers.set("Authorization", `Bearer ${token}`);
     headers.set("Content-Type", "application/json");
-
     headers.delete("host");
 
     const body =
@@ -60,14 +52,32 @@ async function handler(
     });
 
     const responseBody = await response.text();
-    return new NextResponse(responseBody, {
+
+    const nextResponse = new NextResponse(responseBody, {
       status: response.status,
       headers: {
         "Content-Type":
           response.headers.get("Content-Type") || "application/json",
       },
     });
-  } catch {
+
+    // If the backend rejected our token (expired / invalid), clear auth cookies.
+    // AuthContext will detect the cleared session on next refresh and redirect to /auth/login.
+    if (response.status === 401) {
+      const cookieOptions = {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "lax" as const,
+        path: "/",
+        maxAge: 0,
+      };
+      nextResponse.cookies.set("digicoupon_token", "", cookieOptions);
+      nextResponse.cookies.set("digicoupon_session", "", cookieOptions);
+    }
+
+    return nextResponse;
+  } catch (error) {
+    console.log("Proxy Error => ", error);
     return NextResponse.json(
       {
         status: false,

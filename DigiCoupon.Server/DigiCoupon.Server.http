@@ -8,7 +8,7 @@
 @DigiCoupon.Customers = /customer
 @DigiCoupon.CustomerCoupon = /customercoupon
 @DigiCoupon.CouponRedemption = /CouponRedemption
-@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSmF0aW4gSm9zaGkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJqYXRpbkBnbWFpbC5jb20iLCJleHAiOjE3OTA3NzM5MDQsImlzcyI6IkFNU0JhY2tlbmQiLCJhdWQiOiJBTVNGcm9udGVuZCJ9.MdHmx3KZsGdM40kIId2JRL8pMqQAa1TG_oderGbHxZw
+@Token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiSmF0aW4gSm9zaGkiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1laWRlbnRpZmllciI6IjIiLCJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9lbWFpbGFkZHJlc3MiOiJqYXRpbkBnbWFpbC5jb20iLCJleHAiOjE3OTEyOTA2NDQsImlzcyI6IkFNU0JhY2tlbmQiLCJhdWQiOiJBTVNGcm9udGVuZCJ9.ZUL98rTPcF1pgNwnhY_r6_NKP0Gc8z1pLLBWZyUvpkg
 
 ### dashboard get
 get {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Dashboard}}/9/2026-09-25
@@ -159,6 +159,18 @@ Authorization:Bearer {{Token}}
    "Mobile":"2223336669",
    "MemberCode":"R9-003",
    "PublicToken":"url"
+}
+
+### CUSTOMER paged data
+POST {{DigiCoupon.Server_HostAddress}}{{DigiCoupon.Customers}}/paged_data
+Accept: application/json
+Content-Type: application/json
+Authorization:Bearer {{Token}}
+{
+  "Page":1,
+  "PageSize":10,
+  "Search":null,
+   "Data":9
 }
 
 ### CUSTOMER post 1

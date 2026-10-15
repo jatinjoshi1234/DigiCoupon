@@ -1,4 +1,4 @@
-﻿using DigiCoupon.Application.DTO;
+using DigiCoupon.Application.DTO;
 using DigiCoupon.Application.Interfaces.Services;
 
 using Microsoft.AspNetCore.Authorization;
@@ -22,6 +22,14 @@ namespace DigiCoupon.Server.Controllers
         //{
         //    return new string[] { "value1", "value2" };
         //}
+
+        // GET api/<RestuarantController>/my-restaurant
+        [HttpGet("my-restaurant")]
+        public async Task<IActionResult> GetMyRestaurant()
+        {
+            var result = await service.GetCurrentAsync();
+            return Ok(result);
+        }
 
         // GET api/<RestuarantController>/5
         [HttpGet("{id}")]

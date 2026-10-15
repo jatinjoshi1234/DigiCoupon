@@ -11,6 +11,8 @@ namespace DigiCoupon.Application.Interfaces.Repositories
 {
     public interface IDashboard
     {
-        public Task<T> GetDashboardAsync<T>(int restaurantId, DateTime date) where T : class;
+        public Task<T> GetDashboardAsync<T>(int restaurantId) where T : class;
+        public Task<IEnumerable<T>> RecentRedemption<T>(int restaurantId) where T : class;
+    
     }
 }

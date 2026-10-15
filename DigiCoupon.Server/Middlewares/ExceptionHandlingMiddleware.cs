@@ -1,4 +1,4 @@
-﻿using DigiCoupon.Application.DTO;
+using DigiCoupon.Application.DTO;
 using DigiCoupon.Application.Shared.Exceptions;
 using DigiCoupon;
 
@@ -28,34 +28,32 @@ namespace DigiCoupon.Server.Middlewares
             }
             catch (Exception ex)
             {
-                _logger.LogError(ex, ex.Message);
-                //context.Response.Clear();
-                //context.Response.ContentType = "application/json";
-                //await context.Response.WriteAsJsonAsync(new ApiResponse(false, ex.Message.ToString()));
-                Console.WriteLine(ex.Message);
-                //switch (ex)
-                //{
-                //    case ValidationException:
-                //    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                //    await context.Response.WriteAsJsonAsync(new ApiResponse(false, ex.Message));
-                //    break;
+                _logger.LogError(ex, "{Message}", ex.Message);
 
-                //    case NotFoundException:
-                //    context.Response.StatusCode = StatusCodes.Status404NotFound;
-                //    await context.Response.WriteAsJsonAsync(new ApiResponse(false, ex.Message));
-                //    break;
+                if (context.Response.HasStarted)
+                {
+                    _logger.LogWarning("The response has already started, the exception handling middleware cannot write a response.");
+                    throw;
+                }
 
-                //    case UnauthorizedException:
-                //    context.Response.StatusCode = StatusCodes.Status401Unauthorized;
-                //    await context.Response.WriteAsJsonAsync(new ApiResponse(false, ex.Message));
-                //    break;
+                int statusCode = ex switch
+                {
+                    ValidationException => StatusCodes.Status400BadRequest,
+                    NotFoundException => StatusCodes.Status404NotFound,
+                    UnauthorizedException => StatusCodes.Status401Unauthorized,
+                    _ => StatusCodes.Status500InternalServerError
+                };
 
-                //    default:
-                //    context.Response.StatusCode = StatusCodes.Status500InternalServerError;
-                //    await context.Response.WriteAsJsonAsync(new ApiResponse(false, "Internal server error.Please try again later."));
-                //    break;
-                //}
-                
+                string message = ex switch
+                {
+                    ValidationException or NotFoundException or UnauthorizedException => ex.Message,
+                    _ => "Internal server error please try again after some time."
+                };
+
+                context.Response.ContentType = "application/json";
+                context.Response.StatusCode = statusCode;
+
+                await context.Response.WriteAsJsonAsync(new ApiResponse(false, message) { Code = statusCode });
             }
         }
 

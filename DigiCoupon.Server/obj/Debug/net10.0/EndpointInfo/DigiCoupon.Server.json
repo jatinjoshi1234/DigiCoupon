@@ -77,6 +77,124 @@
         }
       }
     },
+    "/api/auth/forgot-password": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ForgotPasswordRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/me": {
+      "get": {
+        "tags": [
+          "Account"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Account"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegisterRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/logout": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/auth/change-password": {
+      "post": {
+        "tags": [
+          "Account"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequestDto"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequestDto"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ChangePasswordRequestDto"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/CouponRedemption/{id}": {
       "get": {
         "tags": [
@@ -372,7 +490,7 @@
         }
       }
     },
-    "/api/Customer/all/{restuarantId}/{branchId}": {
+    "/api/Customer/all/{restuarantId}": {
       "get": {
         "tags": [
           "Customer"
@@ -393,8 +511,7 @@
           },
           {
             "name": "branchId",
-            "in": "path",
-            "required": true,
+            "in": "query",
             "schema": {
               "pattern": "^-?(?:0|[1-9]\\d*)$",
               "type": [
@@ -406,6 +523,65 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Customer/statictics/{restuarantId}": {
+      "get": {
+        "tags": [
+          "Customer"
+        ],
+        "parameters": [
+          {
+            "name": "restuarantId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "pattern": "^-?(?:0|[1-9]\\d*)$",
+              "type": [
+                "integer",
+                "string"
+              ],
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Customer/paged_data": {
+      "post": {
+        "tags": [
+          "Customer"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaginationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaginationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaginationRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "description": "OK"
@@ -542,6 +718,38 @@
         }
       }
     },
+    "/api/CustomerCoupon/paged_data": {
+      "post": {
+        "tags": [
+          "CustomerCoupon"
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaginationRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaginationRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/PaginationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/CustomerCoupon/all/{customerId}": {
       "get": {
         "tags": [
@@ -598,7 +806,7 @@
         }
       }
     },
-    "/api/Home/{id}/{date}": {
+    "/api/Home/{id}": {
       "get": {
         "tags": [
           "Home"
@@ -616,16 +824,19 @@
               ],
               "format": "int32"
             }
-          },
-          {
-            "name": "date",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string",
-              "format": "date-time"
-            }
           }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/Restuarant/my-restaurant": {
+      "get": {
+        "tags": [
+          "Restuarant"
         ],
         "responses": {
           "200": {
@@ -922,11 +1133,26 @@
   },
   "components": {
     "schemas": {
+      "ChangePasswordRequestDto": {
+        "required": [
+          "currentPassword",
+          "newPassword"
+        ],
+        "type": "object",
+        "properties": {
+          "currentPassword": {
+            "type": "string"
+          },
+          "newPassword": {
+            "type": "string"
+          }
+        }
+      },
       "CouponRedemptionRequestDto": {
         "required": [
           "id",
-          "restaurantBranchId",
           "customerCouponId",
+          "quantity",
           "redemptionDate"
         ],
         "type": "object",
@@ -939,7 +1165,7 @@
             ],
             "format": "int32"
           },
-          "restaurantBranchId": {
+          "customerCouponId": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
             "type": [
               "integer",
@@ -947,7 +1173,7 @@
             ],
             "format": "int32"
           },
-          "customerCouponId": {
+          "quantity": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
             "type": [
               "integer",
@@ -967,28 +1193,15 @@
       "CustomerCouponRequestDto": {
         "required": [
           "id",
-          "restaurantBranchId",
           "customerId",
-          "couponNumber",
           "couponType",
           "price",
           "startDate",
-          "endDate",
-          "totalCoupon",
-          "usageCoupon",
-          "remainingCoupon"
+          "endDate"
         ],
         "type": "object",
         "properties": {
           "id": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "restaurantBranchId": {
             "pattern": "^-?(?:0|[1-9]\\d*)$",
             "type": [
               "integer",
@@ -1003,9 +1216,6 @@
               "string"
             ],
             "format": "int32"
-          },
-          "couponNumber": {
-            "type": "string"
           },
           "couponType": {
             "$ref": "#/components/schemas/CouponType"
@@ -1025,30 +1235,6 @@
           "endDate": {
             "type": "string",
             "format": "date-time"
-          },
-          "totalCoupon": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "usageCoupon": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
-          },
-          "remainingCoupon": {
-            "pattern": "^-?(?:0|[1-9]\\d*)$",
-            "type": [
-              "integer",
-              "string"
-            ],
-            "format": "int32"
           }
         }
       },
@@ -1060,7 +1246,8 @@
           "firstName",
           "lastName",
           "nickName",
-          "mobile"
+          "mobile",
+          "memberCode"
         ],
         "type": "object",
         "properties": {
@@ -1106,6 +1293,23 @@
           },
           "mobile": {
             "type": "string"
+          },
+          "memberCode": {
+            "type": [
+              "null",
+              "string"
+            ]
+          }
+        }
+      },
+      "ForgotPasswordRequestDto": {
+        "required": [
+          "email"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string"
           }
         }
       },
@@ -1121,6 +1325,41 @@
           },
           "password": {
             "type": "string"
+          }
+        }
+      },
+      "PaginationRequest": {
+        "type": "object",
+        "properties": {
+          "page": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "pageSize": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
+          },
+          "search": {
+            "type": [
+              "null",
+              "string"
+            ]
+          },
+          "data": {
+            "pattern": "^-?(?:0|[1-9]\\d*)$",
+            "type": [
+              "integer",
+              "string"
+            ],
+            "format": "int32"
           }
         }
       },
@@ -1143,7 +1382,10 @@
             "type": "string"
           },
           "password": {
-            "type": "string"
+            "type": [
+              "null",
+              "string"
+            ]
           }
         }
       },

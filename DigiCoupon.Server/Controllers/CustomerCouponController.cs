@@ -21,6 +21,13 @@ namespace DigiCoupon.Server.Controllers
             return Ok(result);
         }
 
+        [HttpPost("paged_data")]
+        public async Task<IActionResult> PagedData(PaginationRequest args)
+        {
+            var result = await service.GetAllAsync(args);
+            return Ok(ApiResponse.OnSuccess("Loaded successfully", result));
+        }
+
         [HttpGet("all/{customerId:int}")]
         public async Task<IActionResult> GetByCustomer(int customerId)
         {

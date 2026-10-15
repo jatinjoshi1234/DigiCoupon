@@ -19,5 +19,6 @@ namespace DigiCoupon.Application.Interfaces.Services
         public Task<bool> IsExpired(int customerCouponId, DateTime RedemptionDate);
         public Task<bool> IsExist(int customerCouponId, DateTime RedemptionDate);
         public Task<bool> IsActive(int customerCouponId);
+        public Task<PaginationResponse<CustomerVM>> GetAllAsync(PaginationRequest args);
     }
 }

@@ -15,11 +15,11 @@ namespace DigiCoupon.Server.Controllers
     [Authorize]
     public class HomeController(IDashboardService context) : ControllerBase
     {
-        [HttpGet("{id}/{date}")]
-        public async Task<IActionResult> Get(int id,DateTime date)
+        [HttpGet("{id}")]
+        public async Task<IActionResult> Get(int id)
         {
-            DashboardVM result = await context.GetDashboardAsync(id,date);
-            ApiResponse response = result.RestaurantId > 0 ? ApiResponse.OnSuccess("Dashboard data loaded successfully.", result) : ApiResponse.OnFailer("System could not load dashboard data.");
+            DashboardVM result = await context.GetDashboardAsync(id);
+            ApiResponse response = ApiResponse.OnSuccess("Dashboard data loaded successfully.", result);
             return Ok(response);
         }
     }

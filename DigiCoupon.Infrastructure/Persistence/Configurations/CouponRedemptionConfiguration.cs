@@ -23,6 +23,9 @@ namespace DigiCoupon.Infrastrucure.Persistence.Configurations
 
             entity.Property(x => x.RedemptionDate)
                 .IsRequired();
+            
+            entity.Property(x => x.Quantity)
+                            .IsRequired();
 
             //entity.HasOne(x => x.RestaurantBranch)
             //    .WithMany(x => x.CouponRedemptions)

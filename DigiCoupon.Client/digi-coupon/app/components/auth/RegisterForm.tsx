@@ -3,8 +3,11 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { useAuth } from "@/app/context/AuthContext";
+
 export default function RegisterForm() {
   const router = useRouter();
+  const { register } = useAuth();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -52,33 +55,21 @@ export default function RegisterForm() {
     try {
       setLoading(true);
 
-      const response = await fetch("/api/auth/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Name: formData.name.trim(),
-          Mobile: formData.mobileNo.trim(),
-          Email: formData.email.trim(),
-          Password: formData.password,
-        }),
+      await register({
+        Name: formData.name.trim(),
+        Mobile: formData.mobileNo.trim(),
+        Email: formData.email.trim(),
+        Password: formData.password,
       });
 
-      const result = await response.json();
+      router.replace("/restuarant/create");
 
-      if (!response.ok || !result.status) {
-        throw new Error(result.message || "Registration failed.");
-      }
-
-      router.push("/auth/login");
     } catch (error) {
       setError(
         error instanceof Error
           ? error.message
           : "Unable to create your account.",
       );
-    } finally {
       setLoading(false);
     }
   };

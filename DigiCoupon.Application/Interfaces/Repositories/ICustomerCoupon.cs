@@ -16,5 +16,6 @@ namespace DigiCoupon.Application.Interfaces.Repositories
         public Task<List<CustomerCoupon>> GetAllAsync(int customerId);
         public Task<int> UpdateAsync(CustomerCoupon req);
         public Task<bool> DeleteAsync(CustomerCoupon req);
+        public Task<(int, List<T>)> GetPagedData<T, T1>(T1 args) where T : class where T1 : class;
     }
 }

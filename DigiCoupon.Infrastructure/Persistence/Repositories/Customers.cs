@@ -1,5 +1,7 @@
-﻿using DigiCoupon.Application.Interfaces.Repositories;
+﻿using DigiCoupon.Application.DTO;
+using DigiCoupon.Application.Interfaces.Repositories;
 using DigiCoupon.Domain.Entities;
+using DigiCoupon.Infrastructure.Extensions;
 using DigiCoupon.Infrastructure.Persistence.Contexts;
 using DigiCoupon.Infrastructure.Persistence.Interfaces;
 using DigiCoupon.Infrastructure.Persistence.StoreProcedures;
@@ -30,7 +32,17 @@ namespace DigiCoupon.Infrastructure.Persistence.Repositories
 
         public async Task<Domain.Entities.Customers> GetByAsync(Expression<Func<Domain.Entities.Customers, bool>> args)
         {
-            return await context.GetByIdAsync<Domain.Entities.Customers>(args) ?? null!;
+            return await context.GetByIdAsync<Domain.Entities.Customers>(args) ?? null!;   
+        }
+
+        public async Task<(int,List<T>)> GetPagedData<T,T1>(T1 args) where T : class where T1 : class
+        {
+            return await fetch.QueryMultipleAsync<int,T>(CustomerProcedure.ProcName, args.ToDynamicParameters<T1>());
+        }
+
+        public async Task<List<T>> GetReportCount<T>(int restId) where T : class
+        {
+            return await fetch.QueryAsync<T>($"exec {CustomerProcedure.CountsProc} {restId}");
         }
 
         public async Task<List<Domain.Entities.Customers>> GetAllAsync(int resuarantId, int branchId = 0)
@@ -39,9 +51,10 @@ namespace DigiCoupon.Infrastructure.Persistence.Repositories
             return await context.GetAsync<Domain.Entities.Customers>(predict);
         }
 
-        public async Task<IEnumerable<T>> GetCustomerByRestaurant<T>(int id) where T : class
+        public async Task<List<Domain.Entities.Customers>> GetCustomerByRestaurant(int id)
         {
-            return await fetch.ExecuteAsync<T>(CustomerProcedure.ProcName, new{ RestuarantId = id });
+            Expression<Func<Domain.Entities.Customers, Domain.Entities.Customers>> selector =  s => new Domain.Entities.Customers { Id = s.Id, FirstName = s.FirstName, LastName = s.LastName,NickName = s.NickName };
+            return await context.GetAllAsync<Domain.Entities.Customers, Domain.Entities.Customers>(x => x.RestaurantId == id, selector);
         } 
 
         public async Task<int> UpdateAsync(Domain.Entities.Customers req)

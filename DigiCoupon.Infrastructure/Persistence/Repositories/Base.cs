@@ -72,6 +72,11 @@ namespace DigiCoupon.Infrastructure.Persistence.Repositories
             return await _context.Set<TEntity>().AsNoTracking().Where(args).ToListAsync();
         }
 
+        public async Task<List<TResult>> GetAllAsync<TEntity, TResult>(Expression<Func<TEntity, bool>> args,Expression<Func<TEntity,TResult>> selector) where TEntity : class
+        {
+            return await _context.Set<TEntity>().AsNoTracking().Where(args).Select(selector).ToListAsync();
+        }
+
         /// <summary>
         /// Get all records records
         /// </summary>

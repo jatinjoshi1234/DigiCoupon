@@ -1,6 +1,38 @@
 [
   {
     "ContainingType": "DigiCoupon.Server.Controllers.AccountController",
+    "Method": "ChangePasswordAsync",
+    "RelativePath": "api/auth/change-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "args",
+        "Type": "DigiCoupon.Application.DTO.ChangePasswordRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DigiCoupon.Server.Controllers.AccountController",
+    "Method": "ForgotPasswordAsync",
+    "RelativePath": "api/auth/forgot-password",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "args",
+        "Type": "DigiCoupon.Application.DTO.ForgotPasswordRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DigiCoupon.Server.Controllers.AccountController",
     "Method": "LoginAsync",
     "RelativePath": "api/auth/login",
     "HttpMethod": "POST",
@@ -10,6 +42,42 @@
       {
         "Name": "args",
         "Type": "DigiCoupon.Application.DTO.LoginRequestDto",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DigiCoupon.Server.Controllers.AccountController",
+    "Method": "LogoutAsync",
+    "RelativePath": "api/auth/logout",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DigiCoupon.Server.Controllers.AccountController",
+    "Method": "MeAsync",
+    "RelativePath": "api/auth/me",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DigiCoupon.Server.Controllers.AccountController",
+    "Method": "UpdateMeAsync",
+    "RelativePath": "api/auth/me",
+    "HttpMethod": "PUT",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "args",
+        "Type": "DigiCoupon.Application.DTO.RegisterRequestDto",
         "IsRequired": true
       }
     ],
@@ -214,7 +282,7 @@
   {
     "ContainingType": "DigiCoupon.Server.Controllers.CustomerController",
     "Method": "Get",
-    "RelativePath": "api/Customer/all/{restuarantId}/{branchId}",
+    "RelativePath": "api/Customer/all/{restuarantId}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -228,6 +296,38 @@
         "Name": "branchId",
         "Type": "System.Nullable\u00601[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]",
         "IsRequired": false
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DigiCoupon.Server.Controllers.CustomerController",
+    "Method": "PagedData",
+    "RelativePath": "api/Customer/paged_data",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "args",
+        "Type": "DigiCoupon.Application.DTO.PaginationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DigiCoupon.Server.Controllers.CustomerController",
+    "Method": "GetCountAsync",
+    "RelativePath": "api/Customer/statictics/{restuarantId}",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "restuarantId",
+        "Type": "System.Int32",
+        "IsRequired": true
       }
     ],
     "ReturnTypes": []
@@ -318,9 +418,25 @@
     "ReturnTypes": []
   },
   {
+    "ContainingType": "DigiCoupon.Server.Controllers.CustomerCouponController",
+    "Method": "PagedData",
+    "RelativePath": "api/CustomerCoupon/paged_data",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "args",
+        "Type": "DigiCoupon.Application.DTO.PaginationRequest",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  },
+  {
     "ContainingType": "DigiCoupon.Server.Controllers.HomeController",
     "Method": "Get",
-    "RelativePath": "api/Home/{id}/{date}",
+    "RelativePath": "api/Home/{id}",
     "HttpMethod": "GET",
     "IsController": true,
     "Order": 0,
@@ -328,11 +444,6 @@
       {
         "Name": "id",
         "Type": "System.Int32",
-        "IsRequired": true
-      },
-      {
-        "Name": "date",
-        "Type": "System.DateTime",
         "IsRequired": true
       }
     ],
@@ -490,6 +601,16 @@
         "IsRequired": true
       }
     ],
+    "ReturnTypes": []
+  },
+  {
+    "ContainingType": "DigiCoupon.Server.Controllers.RestuarantController",
+    "Method": "GetMyRestaurant",
+    "RelativePath": "api/Restuarant/my-restaurant",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
     "ReturnTypes": []
   }
 ]

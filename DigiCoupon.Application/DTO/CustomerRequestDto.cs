@@ -11,7 +11,8 @@ namespace DigiCoupon.Application.DTO
         string FirstName,
         string? LastName,
         string? NickName,
-        string Mobile
+        string Mobile,
+        string? MemberCode
     );
 
     public class CustomerVM
@@ -23,7 +24,9 @@ namespace DigiCoupon.Application.DTO
         public bool IsActive { get; set; }
         public int PassId { get; set; }
         public int Total { get; set; }
+        public int TotalPass { get; set; }
         public int Usage { get; set; }
         public int Remaining { get; set; }
+        public decimal Price { get; set; }
     }
 }

@@ -3,10 +3,8 @@ import { AuthUser, LoginRequest, LoginResponse } from "../type/auth";
 import { ApiResponse } from "../type/api-response";
 import { NextRequest, NextResponse } from "next/server";
 
-export async function login(
-  request: LoginRequest,
-): Promise<ApiResponse<LoginResponse>> {
-  return Fetch<ApiResponse<LoginResponse>>("auth/login", {
+export async function login(request: LoginRequest): Promise<ApiResponse> {
+  return Fetch("auth/login", {
     method: "POST",
     body: JSON.stringify(request),
   });

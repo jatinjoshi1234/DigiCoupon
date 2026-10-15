@@ -2,33 +2,66 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
-  ChevronLeft,
-  ChevronRight,
   Eye,
+  MoreVertical,
   Phone,
   Plus,
   Search,
+  Ticket,
   TicketCheck,
+  Trash2,
   Users,
 } from "lucide-react";
 
 import styles from "./CustomerPage.module.css";
 import {
   Customer,
-  CustomerRequest,
+  deleteCustomer,
   getCustomers,
+  getPagedData,
 } from "@/app/services/customer.service";
 import CustomerFormModal from "./CustomerFormModal";
+import { ApiResponse, PaginationRequest } from "@/app/type/api-response";
+import ConfirmModal from "../confirmModal/ConfirmModal";
+import Pagination from "../shared/Pagination";
+import CustomerCouponModal from "./Coupon/CustomerCouponModal";
+import RedeemPassModal from "./Coupon/redemptions/RedeemPassModal";
+import { useAuth } from "@/app/context/AuthContext";
 
 export default function CustomerPage() {
-  const [customers, setCustomers] = useState<Customer[]>([]);
   const [search, setSearch] = useState("");
   const [showAddCustomer, setShowAddCustomer] = useState(false);
-  const [saving, setSaving] = useState(false);
-  const [pageNumber, setPageNumber] = useState(1);
-  const pageSize = 12;
+  const [customers, setCustomers] = useState<Customer[]>([]);
+  const [page, setPage] = useState(1);
+  const [pageSize, setPageSize] = useState(10);
+  const [totalRecords, setTotalRecords] = useState(0);
+  const [selectedCustomerId, setSelectedCustomerId] = useState<number | null>(
+    null,
+  );
+  const [passId, setPassId] = useState<number | null>(null);
+  const [deleteCustomerId, setDeleteCustomerId] = useState<number | null>(null);
 
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [openMenuCustomerId, setOpenMenuCustomerId] = useState<number | null>(
+    null,
+  );
+  const [showCouponModal, setShowCouponModal] = useState(false);
+
+  const [couponId, setCouponId] = useState<number | null>(null);
+  const [redeemError, setRedeemError] = useState<string | null>(null);
+  const [redeemTitle, setRedeemTitle] = useState<string>("");
+  const [redeemLoading, setRedeemLoading] = useState(false);
+  const [redeemWarning, setRedeemWarning] = useState("");
+  const [showRedeemPopup, setShowRedeemPopup] = useState(false);
+  const [redeemCustomer, setRedeemCustomer] = useState<{
+    customerCouponId: number;
+    customerName: string;
+    mobile: string;
+  } | null>(null);
+  const { restaurant, restaurantId, isLoading: authLoading } = useAuth();
+  const currentRestaurantId = restaurant?.id || restaurantId;
 
   /*
    * Temporary data.
@@ -36,14 +69,15 @@ export default function CustomerPage() {
    * Replace this with your customer API.
    */
   useEffect(() => {
+    if (authLoading || !currentRestaurantId) return;
+
     let isMounted = true; // Prevents race conditions if component unmounts quickly
 
     const fetchData = async () => {
       try {
-        const data = await loadCustomers(); // Ensure you await the async call
+        const pageData = await loadPagedData(currentRestaurantId);
         if (isMounted) {
-          setCustomers(data);
-          console.log("Customer Page data => ", data);
+          //setCustomers(data);
           setLoading(false);
         }
       } catch (error) {
@@ -57,11 +91,30 @@ export default function CustomerPage() {
     return () => {
       isMounted = false; // Cleanup function
     };
-  }, []);
+  }, [page, pageSize, search, currentRestaurantId, authLoading]);
 
-  async function loadCustomers() {
-    return await getCustomers(9);
+  async function loadPagedData(targetRestId?: number) {
+    const activeRestId = targetRestId || currentRestaurantId;
+    if (!activeRestId) return;
+
+    const payload: PaginationRequest = {
+      Data: activeRestId,
+      Page: page,
+      PageSize: pageSize,
+      Search: search,
+    };
+    const res = await getPagedData(payload);
+    console.log("pagedata => response => ", res);
+    setCustomers(res.items);
+    setPage(res.page);
+    setPageSize(res.pageSize);
+    setTotalRecords(res.totalRecords);
   }
+
+  // async function onSuccess() {
+  //   const data = await getCustomers(currentRestaurantId);
+  //   setCustomers(data);
+  // }
 
   const filteredCustomers = useMemo(() => {
     const value = search.trim().toLowerCase();
@@ -79,63 +132,43 @@ export default function CustomerPage() {
     });
   }, [customers, search]);
 
-  /*
-   * Temporary client-side pagination.
-   *
-   * Later replace this with server-side pagination
-   * using pageNumber/pageSize in your API.
-   */
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredCustomers.length / pageSize),
-  );
-
-  const paginatedCustomers = filteredCustomers.slice(
-    (pageNumber - 1) * pageSize,
-    pageNumber * pageSize,
-  );
-
   function handleSearch(value: string) {
     setSearch(value);
-    setPageNumber(1);
+    //setPageNumber(1);
   }
 
-  function handleRedeem(customer: Customer) {
-    if (!customer.isActive) {
-      return;
-    }
+  function onRedeemPopup(customer: Customer) {
+    setRedeemCustomer({
+      customerCouponId: customer.passId ?? 0,
+      customerName: customer.name,
+      mobile: customer.mobile,
+    });
 
-    /*
-     * Open redeem confirmation modal here.
-     *
-     * Later:
-     * POST /api/customer-coupons/{passId}/redeem
-     */
-    console.log("Redeem customer:", customer);
+    if (customer.passId != undefined && customer.passId != null)
+      setCouponId(customer.passId ?? 0);
+    else setRedeemError("Please select a customer to redeem a pass");
   }
 
-  async function handleAddCustomer(data: CustomerRequest) {
-    try {
-      setSaving(true);
-
-      console.log("Customer data:", data);
-
-      // Later replace this with your API call
-      // await Fetch("/customers", {
-      //   method: "POST",
-      //   body: JSON.stringify(data),
-      // });
-
-      setShowAddCustomer(false);
-    } catch (error) {
-      console.error("Failed to add customer:", error);
-    } finally {
-      setSaving(false);
+  async function handleDeleteCustomer() {
+    const res: ApiResponse = await deleteCustomer(deleteCustomerId ?? 0);
+    console.log("delete page res => ", res);
+    if (res.status) {
+      await loadPagedData();
+      setDeleteCustomerId(null);
+    } else {
+      setError(res.message);
     }
   }
 
-  function handleView(customer: Customer) {
-    console.log("View customer:", customer);
+  async function handleRedeem() {
+    const res: ApiResponse = await deleteCustomer(deleteCustomerId ?? 0);
+    console.log("delete page res => ", res);
+    if (res.status) {
+      await loadPagedData();
+      setDeleteCustomerId(null);
+    } else {
+      setError(res.message);
+    }
   }
 
   function getInitials(name: string) {
@@ -165,7 +198,10 @@ export default function CustomerPage() {
         <button
           type="button"
           className={styles.primaryButton}
-          onClick={() => setShowAddCustomer(true)}
+          onClick={() => {
+            setSelectedCustomerId(null);
+            setShowAddCustomer(true);
+          }}
         >
           <Plus size={18} />
           <span>Add Customer</span>
@@ -191,7 +227,7 @@ export default function CustomerPage() {
       {/* ================= CONTENT ================= */}
       {loading ? (
         <div className={styles.loading}>Loading customers...</div>
-      ) : paginatedCustomers.length === 0 ? (
+      ) : customers.length === 0 ? (
         <div className={styles.emptyState}>
           <div className={styles.emptyIcon}>
             <Users size={28} />
@@ -209,7 +245,10 @@ export default function CustomerPage() {
             <button
               type="button"
               className={styles.primaryButton}
-              onClick={() => console.log("Add customer")}
+              onClick={() => {
+                setSelectedCustomerId(null);
+                setShowAddCustomer(true);
+              }}
             >
               <Plus size={18} />
               Add Customer
@@ -221,7 +260,7 @@ export default function CustomerPage() {
           {/* ================= CUSTOMER GRID ================= */}
 
           <div className={styles.customerGrid}>
-            {paginatedCustomers.map((customer) => {
+            {customers.map((customer) => {
               const pass = customer.isActive;
 
               return (
@@ -240,15 +279,69 @@ export default function CustomerPage() {
                         {customer.nickName && <span>{customer.nickName}</span>}
                       </div>
                     </div>
-
-                    <button
-                      type="button"
-                      className={styles.viewIconButton}
-                      title="View customer"
-                      onClick={() => handleView(customer)}
-                    >
-                      <Eye size={17} />
-                    </button>
+                    <div className={styles.moreMenuWrapper}>
+                      <button
+                        type="button"
+                        className={styles.moreButton}
+                        title="More actions"
+                        onClick={() => {
+                          setOpenMenuCustomerId(
+                            openMenuCustomerId === customer.customerId
+                              ? null
+                              : customer.customerId,
+                          );
+                        }}
+                      >
+                        <MoreVertical size={19} />
+                      </button>{" "}
+                      {openMenuCustomerId === customer.customerId && (
+                        <div className={styles.moreMenu}>
+                          <button
+                            type="button"
+                            className={styles.menuItem}
+                            onClick={() => {
+                              setSelectedCustomerId(customer.customerId);
+                              setShowAddCustomer(true);
+                              setOpenMenuCustomerId(null);
+                            }}
+                          >
+                            {" "}
+                            <Eye size={16} />
+                            <span>View Customer</span>{" "}
+                          </button>
+                          <button
+                            type="button"
+                            className={styles.menuItem}
+                            onClick={() => {
+                              setPassId(customer.passId ?? 0);
+                              setSelectedCustomerId(customer.customerId);
+                              setShowCouponModal(true);
+                              setOpenMenuCustomerId(null);
+                            }}
+                          >
+                            <Ticket size={16} />{" "}
+                            <span>
+                              {" "}
+                              {customer.passId && customer.passId > 0
+                                ? "Update Pass"
+                                : "Add Pass"}
+                            </span>{" "}
+                          </button>
+                          <button
+                            type="button"
+                            className={`${styles.menuItem} 
+                                ${styles.deleteMenuItem}`}
+                            onClick={() => {
+                              setDeleteCustomerId(customer.customerId);
+                              setOpenMenuCustomerId(null);
+                            }}
+                          >
+                            <Trash2 size={16} />
+                            <span>Delete Customer</span>{" "}
+                          </button>{" "}
+                        </div>
+                      )}
+                    </div>
                   </div>
 
                   {/* Mobile */}
@@ -263,11 +356,10 @@ export default function CustomerPage() {
 
                   {pass ? (
                     <div
-                      className={`${styles.passStatus} ${
-                        customer.remaining <= 5
-                          ? styles.passWarning
-                          : styles.passActive
-                      }`}
+                      className={`${styles.passStatus} ${customer.remaining <= 5
+                        ? styles.passWarning
+                        : styles.passActive
+                        }`}
                     >
                       <div className={styles.passIcon}>
                         <TicketCheck size={17} />
@@ -296,24 +388,16 @@ export default function CustomerPage() {
                   )}
 
                   {/* Actions */}
-
                   <div className={styles.cardActions}>
-                    <button
-                      type="button"
-                      className={styles.viewButton}
-                      onClick={() => handleView(customer)}
-                    >
-                      View Customer
-                    </button>
-
                     {customer && customer.remaining > 0 && (
                       <button
                         type="button"
                         className={styles.redeemButton}
-                        onClick={() => handleRedeem(customer)}
+                        onClick={() => onRedeemPopup(customer)}
                       >
+                        {" "}
                         <TicketCheck size={17} />
-                        Redeem
+                        Redeem Pass{" "}
                       </button>
                     )}
                   </div>
@@ -324,55 +408,87 @@ export default function CustomerPage() {
 
           {/* ================= PAGINATION ================= */}
 
-          {totalPages > 1 && (
-            <div className={styles.pagination}>
-              <button
-                type="button"
-                className={styles.pageButton}
-                disabled={pageNumber === 1}
-                onClick={() => setPageNumber((p) => p - 1)}
-              >
-                <ChevronLeft size={17} />
-                <span className={styles.desktopOnly}>Previous</span>
-              </button>
-
-              <div className={styles.pageNumbers}>
-                {Array.from(
-                  { length: totalPages },
-                  (_, index) => index + 1,
-                ).map((page) => (
-                  <button
-                    key={page}
-                    type="button"
-                    className={`${styles.pageNumber} ${
-                      pageNumber === page ? styles.pageNumberActive : ""
-                    }`}
-                    onClick={() => setPageNumber(page)}
-                  >
-                    {page}
-                  </button>
-                ))}
-              </div>
-
-              <button
-                type="button"
-                className={styles.pageButton}
-                disabled={pageNumber === totalPages}
-                onClick={() => setPageNumber((p) => p + 1)}
-              >
-                <span className={styles.desktopOnly}>Next</span>
-                <ChevronRight size={17} />
-              </button>
-            </div>
-          )}
+          <Pagination
+            currentPage={page}
+            pageSize={pageSize}
+            totalRecords={totalRecords}
+            onPageChange={setPage}
+            onPageSizeChange={(size) => {
+              setPageSize(size);
+              setPage(1);
+            }}
+            pageSizeOptions={[2, 10, 20, 50, 100]}
+          />
         </>
       )}
-      <CustomerFormModal
-        open={showAddCustomer}
-        loading={saving}
-        onClose={() => setShowAddCustomer(false)}
-        onSubmit={handleAddCustomer}
+
+      {showAddCustomer && (
+        <CustomerFormModal
+          customerId={selectedCustomerId}
+          onClose={() => setShowAddCustomer(false)}
+          onSuccess={loadPagedData}
+        />
+      )}
+
+      {showCouponModal && selectedCustomerId && (
+        <CustomerCouponModal
+          id={passId ?? 0}
+          customerId={selectedCustomerId}
+          customerName={
+            customers.find((x) => x.customerId === selectedCustomerId)?.name
+          }
+          onClose={() => {
+            setShowCouponModal(false);
+            setSelectedCustomerId(null);
+          }}
+          onSuccess={loadPagedData}
+        />
+      )}
+
+      <ConfirmModal
+        open={deleteCustomerId !== null}
+        title="Delete Customer"
+        message="Are you sure you want to delete this customer? This action cannot be undone."
+        confirmText="Yes, Delete"
+        error={error}
+        cancelText="Cancel"
+        loading={deleteLoading}
+        onCancel={() => {
+          if (!deleteLoading) {
+            setDeleteCustomerId(null);
+          }
+        }}
+        onConfirm={handleDeleteCustomer}
       />
+
+      <ConfirmModal
+        open={showRedeemPopup}
+        title={redeemTitle}
+        message={redeemWarning}
+        confirmText="Yes, Redeem"
+        error={error}
+        cancelText="Cancel"
+        loading={deleteLoading}
+        onCancel={() => {
+          if (!redeemLoading) {
+            setShowRedeemPopup(false);
+          }
+        }}
+        onConfirm={handleRedeem}
+      />
+
+      {redeemCustomer && (
+        <RedeemPassModal
+          customerCouponId={redeemCustomer.customerCouponId}
+          customerName={redeemCustomer.customerName}
+          mobile={redeemCustomer.mobile}
+          onClose={() => setRedeemCustomer(null)}
+          onSuccess={() => {
+            setRedeemCustomer(null);
+            loadPagedData();
+          }}
+        />
+      )}
     </div>
   );
 }

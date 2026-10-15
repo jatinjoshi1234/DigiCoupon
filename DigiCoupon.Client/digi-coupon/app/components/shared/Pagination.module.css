@@ -1,0 +1,252 @@
+.paginationWrapper {
+  width: 100%;
+
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 20px;
+
+  padding: 16px 0 0;
+}
+
+/* =========================
+   LEFT SECTION
+========================= */
+
+.leftSection {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+
+  color: #64748b;
+
+  font-size: 13px;
+}
+
+.showText {
+  white-space: nowrap;
+}
+
+.pageSizeSelect {
+  height: 34px;
+  min-width: 62px;
+
+  padding: 0 28px 0 9px;
+
+  border: 1px solid #e2e8f0;
+  border-radius: 7px;
+
+  background: #ffffff;
+
+  color: #334155;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  outline: none;
+
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
+}
+
+.pageSizeSelect:hover {
+  border-color: #cbd5e1;
+}
+
+.pageSizeSelect:focus {
+  border-color: #f97316;
+
+  box-shadow:
+    0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.recordInfo {
+  margin-left: 12px;
+
+  color: #64748b;
+
+  white-space: nowrap;
+}
+
+.recordInfo strong {
+  color: #334155;
+  font-weight: 600;
+}
+
+/* =========================
+   RIGHT SECTION
+========================= */
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+
+.pageButton,
+.navigationButton {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 7px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.15s ease;
+}
+
+/* PAGE BUTTON */
+
+.pageButton {
+  border: 1px solid #e2e8f0;
+
+  background: #ffffff;
+
+  color: #475569;
+}
+
+.pageButton:hover {
+  border-color: #fed7aa;
+
+  background: #fff7ed;
+
+  color: #f97316;
+
+  transform: translateY(-1px);
+}
+
+/* ACTIVE PAGE */
+
+.pageButton.active {
+  border-color: #f97316;
+
+  background: #f97316;
+
+  color: #ffffff;
+}
+
+.pageButton.active:hover {
+  background: #ea580c;
+
+  border-color: #ea580c;
+
+  color: #ffffff;
+}
+
+/* PREVIOUS / NEXT */
+
+.navigationButton {
+  border: 1px solid #e2e8f0;
+
+  background: #ffffff;
+
+  color: #64748b;
+
+  font-size: 20px;
+  line-height: 1;
+}
+
+.navigationButton:hover:not(:disabled) {
+  border-color: #fed7aa;
+
+  background: #fff7ed;
+
+  color: #f97316;
+
+  transform: translateY(-1px);
+}
+
+.navigationButton:disabled {
+  opacity: 0.45;
+
+  cursor: not-allowed;
+
+  transform: none;
+}
+
+/* ELLIPSIS */
+
+.ellipsis {
+  width: 26px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #94a3b8;
+
+  font-size: 14px;
+}
+
+/* =========================
+   MOBILE
+========================= */
+
+@media (max-width: 700px) {
+  .paginationWrapper {
+    flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 14px;
+  }
+
+  .leftSection {
+    width: 100%;
+
+    justify-content: flex-start;
+  }
+
+  .recordInfo {
+    margin-left: auto;
+  }
+
+  .paginationControls {
+    width: 100%;
+
+    justify-content: flex-end;
+  }
+}
+
+/* =========================
+   SMALL MOBILE
+========================= */
+
+@media (max-width: 480px) {
+  .leftSection {
+    width: 100%;
+  }
+
+  .recordInfo {
+    display: none;
+  }
+
+  .paginationControls {
+    justify-content: center;
+  }
+
+  .pageButton,
+  .navigationButton {
+    width: 32px;
+    height: 32px;
+  }
+
+  .paginationControls {
+    gap: 4px;
+  }
+}

@@ -124,6 +124,16 @@ namespace DigiCoupon.Application.Interfaces.Repositories
         /// <param name="includes"></param>
         /// <returns></returns>
         public Task<TEntity> GetByIdAsync<TEntity>(Expression<Func<TEntity, bool>> args, params Func<IQueryable<TEntity>, IQueryable<TEntity>>[] includes) where TEntity : class;
+
+        /// <summary>
+        /// get all record with selector predict
+        /// </summary>
+        /// <typeparam name="TEntity"></typeparam>
+        /// <param name="args"></param>
+        /// <param name="includes"></param>
+        /// <returns></returns>
+        public Task<List<TResult>> GetAllAsync<TEntity, TResult>(Expression<Func<TEntity, bool>> args, Expression<Func<TEntity, TResult>> selector) where TEntity : class;
+        
         public Task AddAsync<TEntity>(TEntity entity) where TEntity : class;
         public Task AddRangeAsync<TEntity>(List<TEntity> entities) where TEntity : class;
         public void Update<TEntity>(TEntity entity) where TEntity : class;

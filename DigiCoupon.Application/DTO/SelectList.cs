@@ -6,13 +6,16 @@ namespace DigiCoupon.Application.DTO
 {
     public class SelectList
     {
-        public SelectList(Guid id, string text)
-        {
-            Id = id;
-            Text = text;
-        }
+        public SelectList(){
 
-        public Guid Id { get; set; }
+        }
+        //public SelectList(int id, string text)
+        //{
+        //    Id = id;
+        //    Text = text;
+        //}
+
+        public int Id { get; set; }
         public string Text { get; set; } = string.Empty;
     }
 }

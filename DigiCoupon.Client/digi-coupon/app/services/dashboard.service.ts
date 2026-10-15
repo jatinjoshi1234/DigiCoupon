@@ -5,26 +5,27 @@ export interface DashboardData {
   ownerName: string;
   restaurantId: number;
   restaurantName: string;
-
   totalCustomers: number;
   activePasses: number;
   totalRedemptions: number;
   todayRedemptions: number;
   expiringPasses: number;
-
   recentRedemptionsJson: string;
-  recentRedemptions: RecentRedemption[];
+  recentRedemption: RecentRedemption[];
 }
 
 export interface RecentRedemption {
   customer: string;
-  mobile: string;
+  fromDate: string;
+  toDate: string;
   couponNumber: string;
   redemptionOn: string;
 }
 
-export async function getDashboard(): Promise<DashboardData> {
-  const result = await Fetch<DashboardData>("/home/9/2026-09-30");
-  console.log("getDashboard service => result => ", result);
+export async function getDashboard(
+  restaurantId?: number
+): Promise<ApiResponse> {
+  const targetId = restaurantId && restaurantId > 0 ? restaurantId : 0;
+  const result = await Fetch(`/home/${targetId}`);
   return result;
 }

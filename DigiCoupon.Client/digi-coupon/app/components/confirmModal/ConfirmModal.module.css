@@ -1,0 +1,196 @@
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 1100;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 20px;
+
+  background: rgba(15, 23, 42, 0.45);
+  backdrop-filter: blur(3px);
+}
+
+.modal {
+  width: 100%;
+  max-width: 420px;
+
+  background: #ffffff;
+  border-radius: 16px;
+
+  box-shadow:
+    0 20px 50px rgba(15, 23, 42, 0.18),
+    0 5px 15px rgba(15, 23, 42, 0.08);
+
+  overflow: hidden;
+}
+
+.error {
+  padding: 10px 12px;
+
+  border: 1px solid #fecaca;
+  border-radius: 8px;
+
+  background: #fef2f2;
+  color: #dc2626;
+
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  padding: 22px 22px 0;
+}
+
+.icon {
+  width: 46px;
+  height: 46px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 12px;
+
+  color: #dc2626;
+  background: #fef2f2;
+}
+
+.closeButton {
+  width: 34px;
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border: none;
+  border-radius: 8px;
+
+  color: #64748b;
+  background: transparent;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.closeButton:hover:not(:disabled) {
+  background: #f1f5f9;
+  color: #334155;
+}
+
+.closeButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+.content {
+  padding: 18px 22px 22px;
+}
+
+.content h3 {
+  margin: 0 0 8px;
+
+  font-size: 18px;
+  font-weight: 700;
+
+  color: #1e293b;
+}
+
+.content p {
+  margin: 0;
+
+  font-size: 14px;
+  line-height: 1.6;
+
+  color: #64748b;
+}
+
+.footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+
+  padding: 16px 22px 22px;
+
+  border-top: 1px solid #f1f5f9;
+}
+
+.cancelButton,
+.deleteButton {
+  min-height: 40px;
+
+  padding: 0 16px;
+
+  border-radius: 9px;
+
+  font-size: 14px;
+  font-weight: 600;
+
+  cursor: pointer;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.15s ease;
+}
+
+.cancelButton {
+  border: 1px solid #e2e8f0;
+  background: #ffffff;
+  color: #475569;
+}
+
+.cancelButton:hover:not(:disabled) {
+  background: #f8fafc;
+  border-color: #cbd5e1;
+}
+
+.deleteButton {
+  border: 1px solid #dc2626;
+  background: #dc2626;
+  color: #ffffff;
+}
+
+.deleteButton:hover:not(:disabled) {
+  background: #b91c1c;
+  border-color: #b91c1c;
+
+  transform: translateY(-1px);
+}
+
+.cancelButton:disabled,
+.deleteButton:disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+@media (max-width: 600px) {
+  .backdrop {
+    align-items: flex-end;
+    padding: 0;
+  }
+
+  .modal {
+    max-width: none;
+    border-radius: 18px 18px 0 0;
+  }
+
+  .footer {
+    padding-bottom: 24px;
+  }
+
+  .cancelButton,
+  .deleteButton {
+    flex: 1;
+  }
+}

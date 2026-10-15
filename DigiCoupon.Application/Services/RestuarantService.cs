@@ -1,4 +1,4 @@
-﻿using DigiCoupon.Application.DTO;
+using DigiCoupon.Application.DTO;
 using DigiCoupon.Application.Interfaces;
 using DigiCoupon.Application.Interfaces.Auth;
 using DigiCoupon.Application.Interfaces.Repositories;
@@ -8,6 +8,7 @@ using DigiCoupon.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.Json;
 using System.Xml.Linq;
 
 namespace DigiCoupon.Application.Services
@@ -27,9 +28,12 @@ namespace DigiCoupon.Application.Services
             if (isExists)
                 return ApiResponse.OnFailer("Mobile allready registered.");
 
-
-            var result = await context.AddAsync(MapDto(request));
-            return result > 0 ? ApiResponse.OnSuccess("Redord added successfully.") : ApiResponse.OnSuccess("Enter details are invalid. Please enter correct details");
+            Console.WriteLine($"Post Data => {JsonSerializer.Serialize(request)}");
+            var entity = MapDto(request);
+            var result = await context.AddAsync(entity);
+            return result > 0 
+                ? ApiResponse.OnSuccess("Record added successfully.", MapDto(entity)) 
+                : ApiResponse.OnFailer("Enter details are invalid. Please enter correct details.");
         }
 
         public async Task<bool> Exists(int userId)
@@ -39,9 +43,9 @@ namespace DigiCoupon.Application.Services
 
         public async Task<ApiResponse> UpdateAsync(int id, RestuarantRequestDto request)
         {
-            bool isExists = await context.AnyAsync(x => x.Id != request.Id && x.Mobile == request.Mobile || x.Email == request.Email);
+            bool isExists = await context.AnyAsync(x => x.Id != request.Id && (x.Mobile == request.Mobile || x.Email == request.Email));
 
-            if (!isExists)
+            if (isExists)
                 return ApiResponse.OnFailer($"Email or Mobile no allready registered. Please try with another email or password.");
 
             isExists = await context.AnyAsync(x => x.Id == id);
@@ -77,12 +81,21 @@ namespace DigiCoupon.Application.Services
         public async Task<RestuarantRequestDto> GetByUserAsync(int id)
         {
             var restuarant = await context.GetByAsync(x => x.UserId == id);
-
             return MapDto(restuarant);
+        }
+
+        public async Task<ApiResponse> GetCurrentAsync()
+        {
+            var restuarant = await context.GetByAsync(x => x.UserId == userContext.UserId);
+            if (restuarant == null || restuarant.Id <= 0)
+                return ApiResponse.OnFailer("Restaurant not found.");
+
+            return ApiResponse.OnSuccess("Record loaded successfully.", MapDto(restuarant));
         }
 
         private Restaurant MapDto(RestuarantRequestDto request)
         {
+            if (request == null) return null!;
             var user = new Restaurant()
             {
                 Id = request.Id,
@@ -97,6 +110,7 @@ namespace DigiCoupon.Application.Services
 
         private RestuarantRequestDto MapDto(Restaurant obj)
         {
+            if (obj == null) return null!;
             return new RestuarantRequestDto(obj.Id, obj.Name, obj.Email, obj.Mobile, obj.FssaiLicenseNo, obj.Address);
         }
     }

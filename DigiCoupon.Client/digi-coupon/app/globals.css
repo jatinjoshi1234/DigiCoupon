@@ -1219,6 +1219,49 @@ select {
 }
 
 
+/* Header Center (Restaurant Name) */
+
+.header-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1;
+  margin: 0 16px;
+  min-width: 0;
+}
+
+.header-restaurant-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--dc-primary-light, #fff7ed);
+  border: 1px solid #fed7aa;
+  border-radius: 9999px;
+  color: #9a3412;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.2px;
+  box-shadow: 0 1px 3px rgba(249, 115, 22, 0.08);
+  max-width: 360px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: all 0.2s ease;
+}
+
+.header-restaurant-icon {
+  color: var(--dc-primary, #ea580c);
+  flex-shrink: 0;
+}
+
+.header-restaurant-name {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+
 /* Header actions */
 
 .header-actions {
@@ -2142,6 +2185,12 @@ select {
     gap: 10px;
   }
 
+  .header-restaurant-pill {
+    padding: 4px 10px;
+    font-size: 12px;
+    max-width: 180px;
+  }
+
   .sidebar-toggle {
     display: flex;
 
@@ -2313,6 +2362,10 @@ select {
 
   .header-brand-name {
     font-size: 14px;
+  }
+
+  .header-center {
+    display: none;
   }
 
   .redeem-header-button {

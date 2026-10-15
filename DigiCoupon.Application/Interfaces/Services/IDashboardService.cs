@@ -8,6 +8,6 @@ namespace DigiCoupon.Application.Interfaces.Services
 {
     public interface IDashboardService
     {
-        public Task<DashboardVM> GetDashboardAsync(int restaurantId, DateTime date);
+        public Task<DashboardVM> GetDashboardAsync(int restaurantId);
     }
 }

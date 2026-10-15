@@ -3,8 +3,11 @@
 import { FormEvent, useState } from "react";
 import { useRouter } from "next/navigation";
 
+import { useAuth } from "@/app/context/AuthContext";
+
 export default function CreateRestaurantForm() {
   const router = useRouter();
+  const { createRestaurant } = useAuth();
 
   const [formData, setFormData] = useState({
     name: "",
@@ -44,34 +47,21 @@ export default function CreateRestaurantForm() {
     try {
       setLoading(true);
 
-      const response = await fetch("/api/restuarant", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          Id: 0,
-          Name: formData.name.trim(),
-          Email: formData.email.trim(),
-          Mobile: formData.mobileNo.trim(),
-          FssaiLicenseNo: formData.fssaiLicenseNo.trim(),
-          Address: formData.address.trim(),
-        }),
+      await createRestaurant({
+        Id: 0,
+        Name: formData.name.trim(),
+        Email: formData.email.trim(),
+        Mobile: formData.mobileNo.trim(),
+        FssaiLicenseNo: formData.fssaiLicenseNo.trim(),
+        Address: formData.address.trim(),
       });
 
-      const result = await response.json();
+      router.replace("/");
 
-      if (!response.ok || !result.status) {
-        throw new Error(result.message || "Unable to create restaurant.");
-      }
-
-      router.push("/");
-      router.refresh();
     } catch (error) {
       setError(
         error instanceof Error ? error.message : "Unable to create restaurant.",
       );
-    } finally {
       setLoading(false);
     }
   };
