@@ -15,7 +15,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("DigiCoupon.Server")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+ca7196e01a441b1296000094ad373032fa7b015a")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1b32cbe1c73bfd64035f738e0c26aab81fc1e23e")]
 [assembly: System.Reflection.AssemblyProductAttribute("DigiCoupon.Server")]
 [assembly: System.Reflection.AssemblyTitleAttribute("DigiCoupon.Server")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
