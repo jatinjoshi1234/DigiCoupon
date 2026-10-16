@@ -1,0 +1,723 @@
+.page {
+    --orange: #f97316;
+    --orange-dark: #ea580c;
+    --text: #1f2937;
+    --muted: #6b7280;
+    --border: #e5e7eb;
+    --surface: #ffffff;
+    --background: #f8fafc;
+
+    min-height: 100vh;
+    background: var(--background);
+    color: var(--text);
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.page * {
+    box-sizing: border-box;
+}
+
+.header {
+    background: #fff;
+    border-bottom: 1px solid var(--border);
+}
+
+.headerInner {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    gap: 11px;
+    min-width: 0;
+}
+
+.logo {
+    width: 46px;
+    height: 46px;
+    flex-shrink: 0;
+    display: grid;
+    place-items: center;
+    color: white;
+    background: var(--orange);
+    border-radius: 14px;
+}
+
+.brandName {
+    color: #c2410c;
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.6px;
+}
+
+.brandCaption {
+    margin-top: 3px;
+    color: var(--muted);
+    font-size: 12px;
+}
+
+.secureLabel {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    color: #15803d;
+    background: #f0fdf4;
+    padding: 8px 11px;
+    border-radius: 999px;
+    font-size: 12px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.container {
+    width: 100%;
+    max-width: 820px;
+    margin: 0 auto;
+    padding: 28px 24px 16px;
+}
+
+.restaurantCard {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 24px;
+    border: 1px solid #fed7aa;
+    border-radius: 20px;
+    background: linear-gradient(120deg, #fff7ed, #fff);
+}
+
+.restaurantIcon {
+    width: 58px;
+    height: 58px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: var(--orange-dark);
+    background: #ffedd5;
+    border-radius: 16px;
+}
+
+.restaurantInfo {
+    min-width: 0;
+}
+
+.eyebrow {
+    margin-bottom: 5px;
+    color: #c2410c;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 1.2px;
+}
+
+.restaurantInfo h1 {
+    margin: 0;
+    overflow-wrap: anywhere;
+    color: #431407;
+    font-size: 25px;
+    line-height: 1.25;
+    letter-spacing: -0.6px;
+}
+
+.restaurantInfo p {
+    margin: 6px 0 0;
+    color: #9a3412;
+    font-size: 14px;
+}
+
+.section {
+    margin-top: 32px;
+}
+
+.sectionHeading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+
+.sectionHeading h2,
+.historyHeading h2 {
+    margin: 0;
+    font-size: 20px;
+    letter-spacing: -0.4px;
+}
+
+.sectionHeading p,
+.historyHeading p {
+    margin: 5px 0 0;
+    color: var(--muted);
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+.countBadge,
+.transactionCount {
+    flex-shrink: 0;
+    padding: 7px 10px;
+    border-radius: 999px;
+    background: #fff7ed;
+    color: #c2410c;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.passList {
+    display: grid;
+    gap: 14px;
+}
+
+.passCard {
+    width: 100%;
+    min-width: 0;
+    padding: 18px;
+    text-align: left;
+    font: inherit;
+    color: inherit;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 17px;
+    cursor: pointer;
+    transition: border-color 160ms ease, box-shadow 160ms ease;
+}
+
+.passCard:hover {
+    border-color: #fdba74;
+}
+
+.passCardSelected {
+    border: 2px solid var(--orange);
+    padding: 17px;
+    box-shadow: 0 5px 20px rgb(249 115 22 / 8%);
+}
+
+.passCard:focus-visible {
+    outline: 3px solid rgb(249 115 22 / 35%);
+    outline-offset: 3px;
+}
+
+.passTop {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.passIcon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: var(--orange-dark);
+    background: #fff7ed;
+    border-radius: 12px;
+}
+
+.passTitle {
+    flex: 1;
+    min-width: 0;
+}
+
+.passTitle h3 {
+    margin: 0;
+    overflow-wrap: anywhere;
+    font-size: 15px;
+    line-height: 1.4;
+}
+
+.passTitle span {
+    display: block;
+    margin-top: 4px;
+    overflow-wrap: anywhere;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.status {
+    flex-shrink: 0;
+    padding: 6px 9px;
+    border-radius: 999px;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.active {
+    color: #15803d;
+    background: #dcfce7;
+}
+
+.expired {
+    color: #6b7280;
+    background: #f3f4f6;
+}
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 9px;
+    margin-top: 19px;
+}
+
+.stat {
+    min-width: 0;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    background: #f8fafc;
+    border: 1px solid #f1f5f9;
+    border-radius: 12px;
+}
+
+.stat span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.stat strong {
+    font-size: 23px;
+    line-height: 1.1;
+}
+
+.stat .remainingValue {
+    color: #15803d;
+}
+
+.progressTrack {
+    height: 6px;
+    margin-top: 15px;
+    overflow: hidden;
+    background: #ffedd5;
+    border-radius: 999px;
+}
+
+.progressFill {
+    height: 100%;
+    background: var(--orange);
+    border-radius: inherit;
+    transition: width 200ms ease;
+}
+
+.passBottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 15px;
+    padding-top: 13px;
+    border-top: 1px solid #f1f5f9;
+}
+
+.passBottom>span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.passBottom .viewHistory {
+    color: var(--orange-dark);
+    font-weight: 700;
+}
+
+.historySection {
+    margin-top: 34px;
+    overflow: hidden;
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+}
+
+.historyHeading {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.historyIcon {
+    width: 43px;
+    height: 43px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: var(--orange-dark);
+    background: #fff7ed;
+    border-radius: 12px;
+}
+
+.historyHeading h2 {
+    font-size: 18px;
+}
+
+.selectedPassInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 15px 20px;
+    background: #fffaf5;
+    border-bottom: 1px solid #ffedd5;
+}
+
+.selectedPassInfo>div {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.selectedPassInfo>div>span {
+    color: #9a3412;
+    font-size: 9px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.selectedPassInfo strong {
+    overflow-wrap: anywhere;
+    font-size: 13px;
+}
+
+.selectedPassInfo small {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.historyList {
+    padding: 0 20px;
+}
+
+.historyRow {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 17px 0;
+    border-bottom: 1px solid #f1f5f9;
+}
+
+.historyRow:last-child {
+    border-bottom: 0;
+}
+
+.historyDateIcon {
+    width: 41px;
+    height: 41px;
+    display: grid;
+    place-items: center;
+    flex-shrink: 0;
+    color: #64748b;
+    background: #f1f5f9;
+    border-radius: 12px;
+}
+
+.historyDetails {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.historyDetails strong {
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+.historyDetails span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+.quantity {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 4px;
+    flex-shrink: 0;
+}
+
+.quantity strong {
+    color: #c2410c;
+    font-size: 15px;
+}
+
+.quantity span {
+    color: var(--muted);
+    font-size: 10px;
+}
+
+.emptyState {
+    padding: 36px 20px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+    color: var(--muted);
+}
+
+.emptyState strong {
+    color: var(--text);
+    font-size: 14px;
+}
+
+.emptyState p {
+    max-width: 260px;
+    margin: 0;
+    font-size: 12px;
+    line-height: 1.6;
+}
+
+.footer {
+    padding: 30px 0 16px;
+    text-align: center;
+}
+
+.footerLogo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+    color: #c2410c;
+    font-size: 14px;
+    font-weight: 800;
+}
+
+.footer p {
+    margin: 8px 0 0;
+    color: var(--muted);
+    font-size: 11px;
+}
+
+@media (max-width: 600px) {
+    .headerInner {
+        padding: 13px 15px;
+    }
+
+    .logo {
+        width: 40px;
+        height: 40px;
+        border-radius: 12px;
+    }
+
+    .brandName {
+        font-size: 18px;
+    }
+
+    .brandCaption {
+        font-size: 10px;
+    }
+
+    .secureLabel {
+        padding: 7px 8px;
+        font-size: 10px;
+    }
+
+    .container {
+        padding: 17px 13px 12px;
+    }
+
+    .restaurantCard {
+        padding: 18px 15px;
+        gap: 12px;
+        border-radius: 16px;
+    }
+
+    .restaurantIcon {
+        width: 47px;
+        height: 47px;
+        border-radius: 13px;
+    }
+
+    .restaurantInfo h1 {
+        font-size: 20px;
+    }
+
+    .restaurantInfo p {
+        font-size: 12px;
+    }
+
+    .section {
+        margin-top: 26px;
+    }
+
+    .sectionHeading {
+        align-items: flex-start;
+    }
+
+    .sectionHeading h2 {
+        font-size: 18px;
+    }
+
+    .sectionHeading p {
+        max-width: 240px;
+        font-size: 12px;
+    }
+
+    .countBadge {
+        padding: 6px 8px;
+        font-size: 10px;
+    }
+
+    .passCard {
+        padding: 14px;
+        border-radius: 15px;
+    }
+
+    .passCardSelected {
+        padding: 13px;
+    }
+
+    .passTop {
+        gap: 9px;
+    }
+
+    .passIcon {
+        width: 37px;
+        height: 37px;
+    }
+
+    .passTitle h3 {
+        font-size: 13px;
+    }
+
+    .passTitle span {
+        font-size: 10px;
+    }
+
+    .status {
+        padding: 5px 7px;
+        font-size: 10px;
+    }
+
+    .stats {
+        gap: 6px;
+        margin-top: 15px;
+    }
+
+    .stat {
+        padding: 10px 8px;
+        gap: 7px;
+        border-radius: 10px;
+    }
+
+    .stat span {
+        font-size: 10px;
+    }
+
+    .stat strong {
+        font-size: 21px;
+    }
+
+    .passBottom {
+        gap: 8px;
+    }
+
+    .passBottom>span {
+        font-size: 10px;
+    }
+
+    .historySection {
+        margin-top: 26px;
+        border-radius: 15px;
+    }
+
+    .historyHeading {
+        padding: 16px 13px;
+        gap: 10px;
+    }
+
+    .historyHeading h2 {
+        font-size: 16px;
+    }
+
+    .historyHeading p {
+        font-size: 11px;
+    }
+
+    .selectedPassInfo {
+        padding: 13px;
+    }
+
+    .transactionCount {
+        font-size: 10px;
+        padding: 6px 7px;
+    }
+
+    .historyList {
+        padding: 0 13px;
+    }
+
+    .historyRow {
+        gap: 9px;
+        padding: 15px 0;
+    }
+
+    .historyDateIcon {
+        width: 35px;
+        height: 35px;
+        border-radius: 10px;
+    }
+
+    .historyDetails strong {
+        font-size: 11px;
+    }
+
+    .historyDetails span {
+        font-size: 10px;
+    }
+
+    .quantity strong {
+        font-size: 13px;
+    }
+
+    .footer {
+        padding-top: 25px;
+    }
+}
+
+@media (max-width: 360px) {
+    .brandCaption {
+        display: none;
+    }
+
+    .secureLabel {
+        font-size: 9px;
+    }
+
+    .passTop {
+        flex-wrap: wrap;
+    }
+
+    .status {
+        margin-left: auto;
+    }
+
+    .stat {
+        padding: 9px 6px;
+    }
+
+    .stat strong {
+        font-size: 19px;
+    }
+
+    .passBottom .viewHistory {
+        width: 100%;
+        justify-content: flex-end;
+    }
+}

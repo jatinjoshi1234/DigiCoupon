@@ -30,6 +30,7 @@ export interface Customer {
   passType: number;
   totalPass: number;
   couponNo?: number;
+  publicToken: string;
   usage: number;
   remaining: number;
   FromDate: string;

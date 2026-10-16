@@ -13,9 +13,13 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
   const isAuthPage =
     pathname?.startsWith("/auth") || pathname?.startsWith("/restuarant");
-
+  const isPublicCustomerPage = pathname.startsWith("/public/customer/");
   if (isAuthPage) {
     return <>{children}</>;
+  }
+
+  if (isPublicCustomerPage) {
+    return <>{children}</>
   }
 
   return (
@@ -32,7 +36,6 @@ export default function AppShell({ children }: { children: React.ReactNode }) {
 
       <main className="app-main">
         <Header onMenuClick={() => setSidebarOpen(true)} />
-
         <div className="app-content">{children}</div>
       </main>
     </div>

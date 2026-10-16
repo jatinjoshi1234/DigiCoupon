@@ -1247,7 +1247,8 @@
           "lastName",
           "nickName",
           "mobile",
-          "memberCode"
+          "memberCode",
+          "publicToken"
         ],
         "type": "object",
         "properties": {
@@ -1299,6 +1300,9 @@
               "null",
               "string"
             ]
+          },
+          "publicToken": {
+            "type": "string"
           }
         }
       },

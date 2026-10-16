@@ -959,3 +959,23 @@
     min-height: 44px;
   }
 }
+
+.publicTokenButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  padding: 7px 10px;
+  border: none;
+  border-radius: 7px;
+  background: #f97316;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+.publicTokenButton:hover {
+  background: #ea580c;
+}

@@ -69,6 +69,7 @@ namespace DigiCoupon.Infrastructure.Persistence.StoreProcedures
                                                       CC.customer_id,
                                                       CC.PassId,
                                                       isnull(CC.Remaining,0) Remaining,
+                                                      C.public_token PublicToken,
                                                       (select count(*) from customer_coupon where customer_id = C.id) as TotalPass
                                                       --isnull(CC.id,0) PassId,  
                                                       --datediff(day,CC.start_date,CC.end_date) + 1 as Total,  

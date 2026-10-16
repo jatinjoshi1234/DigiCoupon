@@ -2,7 +2,9 @@
 
 import { useEffect, useMemo, useState } from "react";
 import {
+  Copy,
   Eye,
+  Link,
   MoreVertical,
   Phone,
   Plus,
@@ -12,7 +14,7 @@ import {
   Trash2,
   Users,
 } from "lucide-react";
-
+import { toast } from "sonner";
 import styles from "./CustomerPage.module.css";
 import {
   Customer,
@@ -135,6 +137,38 @@ export default function CustomerPage() {
   function handleSearch(value: string) {
     setSearch(value);
     //setPageNumber(1);
+  }
+
+  async function CopylinkTOClipboard(customer: Customer) {
+    const publicUrl = `${window.location.origin}/customers/${customer.publicToken}`;
+    console.log("Public URL => ", publicUrl);
+    if (!customer.publicToken) return;
+
+    try {
+      navigator.clipboard.writeText(publicUrl);
+      //toast.success("Public link copied to clipboard!");
+    } catch (error) {
+      console.error("Clipboard copy failed:", error);
+
+      // Fallback for browsers where Clipboard API is unavailable.
+      const textArea = document.createElement("textarea");
+      textArea.value = publicUrl;
+      textArea.style.position = "fixed";
+      textArea.style.left = "-9999px";
+
+      document.body.appendChild(textArea);
+      textArea.select();
+
+      const copied = document.execCommand("copy");
+      document.body.removeChild(textArea);
+
+      if (copied) {
+
+        toast.success("Public link copied successfully!");
+      } else {
+        toast.error("Public link copied successfully!");
+      }
+    }
   }
 
   function onRedeemPopup(customer: Customer) {
@@ -263,6 +297,10 @@ export default function CustomerPage() {
             {customers.map((customer) => {
               const pass = customer.isActive;
 
+              function onGeneratePublicToken(customer: Customer): void {
+                throw new Error("Function not implemented.");
+              }
+
               return (
                 <div key={customer.customerId} className={styles.customerCard}>
                   {/* Card Header */}
@@ -294,6 +332,8 @@ export default function CustomerPage() {
                       >
                         <MoreVertical size={19} />
                       </button>{" "}
+
+
                       {openMenuCustomerId === customer.customerId && (
                         <div className={styles.moreMenu}>
                           <button
@@ -338,7 +378,17 @@ export default function CustomerPage() {
                           >
                             <Trash2 size={16} />
                             <span>Delete Customer</span>{" "}
-                          </button>{" "}
+                          </button>
+                          <button
+                            type="button"
+                            className={styles.menuItem}
+                            onClick={() => CopylinkTOClipboard(customer)}>
+                            {" "}
+                            <Copy size={16} />
+                            <span>Copy Link</span>{" "}
+                          </button>
+
+                          {" "}
                         </div>
                       )}
                     </div>

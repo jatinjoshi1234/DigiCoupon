@@ -1,4 +1,5 @@
 ﻿using DigiCoupon.Application.DTO;
+using DigiCoupon.Application.Interfaces.Auth;
 using DigiCoupon.Application.Interfaces.Repositories;
 using DigiCoupon.Domain.Entities;
 using DigiCoupon.Infrastructure.Extensions;
@@ -16,10 +17,11 @@ using static Dapper.SqlMapper;
 
 namespace DigiCoupon.Infrastructure.Persistence.Repositories
 {
-    internal class Customers(IBase context, IDapperContext fetch) : ICustomers
+    internal class Customers(IBase context, IDapperContext fetch,ITokenProvider tokenGenerator) : ICustomers
     {
         public async Task<int> AddAsync(Domain.Entities.Customers req)
         {
+            req.PublicToken = await tokenGenerator.Generate();
             await context.AddAsync<Domain.Entities.Customers>(req);
             await context.SaveChangesAsync();
             return req.Id;

@@ -1,0 +1,265 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "F:\\Jatin\\DigiCoupon\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|f:\\jatin\\digicoupon\\digicoupon.infrastructure\\persistence\\storeprocedures\\customerprocedure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|solutionrelative:digicoupon.infrastructure\\persistence\\storeprocedures\\customerprocedure.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|f:\\jatin\\digicoupon\\digicoupon.infrastructure\\persistence\\repositories\\customercoupon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|solutionrelative:digicoupon.infrastructure\\persistence\\repositories\\customercoupon.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA14CC7-E5BA-836E-F69F-12E4D6E24B6F}|DigiCoupon.Application\\DigiCoupon.Application.csproj|f:\\jatin\\digicoupon\\digicoupon.application\\interfaces\\repositories\\icustomers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA14CC7-E5BA-836E-F69F-12E4D6E24B6F}|DigiCoupon.Application\\DigiCoupon.Application.csproj|solutionrelative:digicoupon.application\\interfaces\\repositories\\icustomers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA14CC7-E5BA-836E-F69F-12E4D6E24B6F}|DigiCoupon.Application\\DigiCoupon.Application.csproj|f:\\jatin\\digicoupon\\digicoupon.application\\services\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA14CC7-E5BA-836E-F69F-12E4D6E24B6F}|DigiCoupon.Application\\DigiCoupon.Application.csproj|solutionrelative:digicoupon.application\\services\\customerservice.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|f:\\jatin\\digicoupon\\digicoupon.infrastructure\\persistence\\repositories\\customers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|solutionrelative:digicoupon.infrastructure\\persistence\\repositories\\customers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA14CC7-E5BA-836E-F69F-12E4D6E24B6F}|DigiCoupon.Application\\DigiCoupon.Application.csproj|f:\\jatin\\digicoupon\\digicoupon.application\\dto\\customerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA14CC7-E5BA-836E-F69F-12E4D6E24B6F}|DigiCoupon.Application\\DigiCoupon.Application.csproj|solutionrelative:digicoupon.application\\dto\\customerrequestdto.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|f:\\jatin\\digicoupon\\digicoupon.infrastructure\\persistence\\contexts\\dappercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|solutionrelative:digicoupon.infrastructure\\persistence\\contexts\\dappercontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|f:\\jatin\\digicoupon\\digicoupon.infrastructure\\extensions\\dynamicparametersextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|solutionrelative:digicoupon.infrastructure\\extensions\\dynamicparametersextensions.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Jiten ASP.NET\\AppData\\Local\\Temp\\.vsdbgsrc\\40e58c98dded20e81a9b845996c3349a6b3268953dba7d2d854e87a07516f436\\TaskAwaiter.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Users\\Jiten ASP.NET\\AppData\\Local\\Temp\\.vsdbgsrc\\2a31457b3ed3d8f67957a71ab800984dc6186c67e1a6c4c90a7213da4c2b920d\\Task.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{AA20B475-307F-796B-4F69-0CEF964A5F69}|DigiCoupon.Domain\\DigiCoupon.Domain.csproj|f:\\jatin\\digicoupon\\digicoupon.domain\\entities\\customers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{AA20B475-307F-796B-4F69-0CEF964A5F69}|DigiCoupon.Domain\\DigiCoupon.Domain.csproj|solutionrelative:digicoupon.domain\\entities\\customers.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|f:\\jatin\\digicoupon\\digicoupon.infrastructure\\persistence\\auth\\tokenprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|solutionrelative:digicoupon.infrastructure\\persistence\\auth\\tokenprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{E24D68C3-131E-24DD-6327-8C03FDB07CA8}|DigiCoupon.Server\\DigiCoupon.Server.csproj|f:\\jatin\\digicoupon\\digicoupon.server\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{E24D68C3-131E-24DD-6327-8C03FDB07CA8}|DigiCoupon.Server\\DigiCoupon.Server.csproj|solutionrelative:digicoupon.server\\controllers\\customercontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{FAA14CC7-E5BA-836E-F69F-12E4D6E24B6F}|DigiCoupon.Application\\DigiCoupon.Application.csproj|f:\\jatin\\digicoupon\\digicoupon.application\\interfaces\\auth\\itokenprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FAA14CC7-E5BA-836E-F69F-12E4D6E24B6F}|DigiCoupon.Application\\DigiCoupon.Application.csproj|solutionrelative:digicoupon.application\\interfaces\\auth\\itokenprovider.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|f:\\jatin\\digicoupon\\digicoupon.infrastructure\\persistence\\contexts\\digicouponcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{372D102B-3E5C-D6F6-907D-32C95D558D1C}|DigiCoupon.Infrastructure\\DigiCoupon.Infrastructure.csproj|solutionrelative:digicoupon.infrastructure\\persistence\\contexts\\digicouponcontext.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 7,
+          "Children": [
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{aa2115a1-9712-457b-9047-dbb71ca2cdd2}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "CustomerCoupon.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\Repositories\\CustomerCoupon.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Infrastructure\\Persistence\\Repositories\\CustomerCoupon.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\Repositories\\CustomerCoupon.cs",
+              "RelativeToolTip": "DigiCoupon.Infrastructure\\Persistence\\Repositories\\CustomerCoupon.cs",
+              "ViewState": "AgIAACEAAAAAAAAAAAAAwDIAAABUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T13:21:13.053Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ICustomers.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Application\\Interfaces\\Repositories\\ICustomers.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Application\\Interfaces\\Repositories\\ICustomers.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Application\\Interfaces\\Repositories\\ICustomers.cs",
+              "RelativeToolTip": "DigiCoupon.Application\\Interfaces\\Repositories\\ICustomers.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABMAAAAkAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T13:21:04.417Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "DapperContext.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\Contexts\\DapperContext.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Infrastructure\\Persistence\\Contexts\\DapperContext.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\Contexts\\DapperContext.cs",
+              "RelativeToolTip": "DigiCoupon.Infrastructure\\Persistence\\Contexts\\DapperContext.cs",
+              "ViewState": "AgIAABcAAAAAAAAAAAAmwC8AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T10:47:52.112Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
+              "Title": "DynamicParametersExtensions.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Extensions\\DynamicParametersExtensions.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Infrastructure\\Extensions\\DynamicParametersExtensions.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Extensions\\DynamicParametersExtensions.cs",
+              "RelativeToolTip": "DigiCoupon.Infrastructure\\Extensions\\DynamicParametersExtensions.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAAA0AAAAIAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T10:47:50Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 8,
+              "Title": "TaskAwaiter.cs",
+              "DocumentMoniker": "C:\\Users\\Jiten ASP.NET\\AppData\\Local\\Temp\\.vsdbgsrc\\40e58c98dded20e81a9b845996c3349a6b3268953dba7d2d854e87a07516f436\\TaskAwaiter.cs",
+              "ToolTip": "C:\\Users\\Jiten ASP.NET\\AppData\\Local\\Temp\\.vsdbgsrc\\40e58c98dded20e81a9b845996c3349a6b3268953dba7d2d854e87a07516f436\\TaskAwaiter.cs [Read Only]",
+              "ViewState": "AgIAAJcAAAAAAAAAAAAvwLAAAAACAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T10:46:35.481Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 9,
+              "Title": "Task.cs",
+              "DocumentMoniker": "C:\\Users\\Jiten ASP.NET\\AppData\\Local\\Temp\\.vsdbgsrc\\2a31457b3ed3d8f67957a71ab800984dc6186c67e1a6c4c90a7213da4c2b920d\\Task.cs",
+              "ToolTip": "C:\\Users\\Jiten ASP.NET\\AppData\\Local\\Temp\\.vsdbgsrc\\2a31457b3ed3d8f67957a71ab800984dc6186c67e1a6c4c90a7213da4c2b920d\\Task.cs [Read Only]",
+              "ViewState": "AgIAAFgGAAAAAAAAAAAvwHEGAAADAAAAAQAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T10:46:33.749Z",
+              "EditorCaption": " [Read Only]"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "CustomerProcedure.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\StoreProcedures\\CustomerProcedure.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Infrastructure\\Persistence\\StoreProcedures\\CustomerProcedure.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\StoreProcedures\\CustomerProcedure.cs",
+              "RelativeToolTip": "DigiCoupon.Infrastructure\\Persistence\\StoreProcedures\\CustomerProcedure.cs",
+              "ViewState": "AgIAADsAAAAAAAAAAAAowEUAAABAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T07:51:08.135Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "CustomerRequestDto.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Application\\DTO\\CustomerRequestDto.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Application\\DTO\\CustomerRequestDto.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Application\\DTO\\CustomerRequestDto.cs",
+              "RelativeToolTip": "DigiCoupon.Application\\DTO\\CustomerRequestDto.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBoAAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T07:48:36.751Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 4,
+              "Title": "Customers.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\Repositories\\Customers.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Infrastructure\\Persistence\\Repositories\\Customers.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\Repositories\\Customers.cs",
+              "RelativeToolTip": "DigiCoupon.Infrastructure\\Persistence\\Repositories\\Customers.cs",
+              "ViewState": "AgIAABkAAAAAAAAAAAAgwCkAAABTAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T07:27:30.15Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 12,
+              "Title": "CustomerController.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Server\\Controllers\\CustomerController.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Server\\Controllers\\CustomerController.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Server\\Controllers\\CustomerController.cs",
+              "RelativeToolTip": "DigiCoupon.Server\\Controllers\\CustomerController.cs",
+              "ViewState": "AgIAABQAAAAAAAAAAAAgwC8AAAASAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T07:03:08.531Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 13,
+              "Title": "ITokenProvider.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Application\\Interfaces\\Auth\\ITokenProvider.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Application\\Interfaces\\Auth\\ITokenProvider.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Application\\Interfaces\\Auth\\ITokenProvider.cs",
+              "RelativeToolTip": "DigiCoupon.Application\\Interfaces\\Auth\\ITokenProvider.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwA0AAAAbAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T06:53:56.911Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "CustomerService.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Application\\Services\\CustomerService.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Application\\Services\\CustomerService.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Application\\Services\\CustomerService.cs",
+              "RelativeToolTip": "DigiCoupon.Application\\Services\\CustomerService.cs",
+              "ViewState": "AgIAADwAAAAAAAAAAAAIwE0AAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T06:52:39.406Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 11,
+              "Title": "TokenProvider.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\Auth\\TokenProvider.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Infrastructure\\Persistence\\Auth\\TokenProvider.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\Auth\\TokenProvider.cs",
+              "RelativeToolTip": "DigiCoupon.Infrastructure\\Persistence\\Auth\\TokenProvider.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAAABAAAABGAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T06:45:24.014Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 10,
+              "Title": "Customers.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Domain\\Entities\\Customers.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Domain\\Entities\\Customers.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Domain\\Entities\\Customers.cs",
+              "RelativeToolTip": "DigiCoupon.Domain\\Entities\\Customers.cs",
+              "ViewState": "AgIAAAAAAAAAAAAAAAAqwBgAAAAWAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T06:39:06.325Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 14,
+              "Title": "DigiCouponContext.cs",
+              "DocumentMoniker": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\Contexts\\DigiCouponContext.cs",
+              "RelativeDocumentMoniker": "DigiCoupon.Infrastructure\\Persistence\\Contexts\\DigiCouponContext.cs",
+              "ToolTip": "F:\\Jatin\\DigiCoupon\\DigiCoupon.Infrastructure\\Persistence\\Contexts\\DigiCouponContext.cs",
+              "RelativeToolTip": "DigiCoupon.Infrastructure\\Persistence\\Contexts\\DigiCouponContext.cs",
+              "ViewState": "AgIAAA4AAAAAAAAAAAAQwBoAAAAeAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-10-16T06:38:42.683Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

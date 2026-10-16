@@ -11,5 +11,7 @@ namespace DigiCoupon.Application.Interfaces.Auth
     public interface ITokenProvider
     {
         public Task<string> GenerateToken(Users user);
+        public Task<string> Generate();
+        public Task<string> Hash(string token);
     }
 }

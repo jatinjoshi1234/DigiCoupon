@@ -12,7 +12,7 @@ using System.Xml.Linq;
 
 namespace DigiCoupon.Application.Services
 {
-    public class CustomerService(ICustomers context) : ICustomerService
+    public class CustomerService(ICustomers context,ITokenProvider tokenProvider) : ICustomerService
     {
         public async Task<ApiResponse> AddAsync(CustomerRequestDto request)
         {
@@ -21,6 +21,7 @@ namespace DigiCoupon.Application.Services
             if (isExists)
                 return ApiResponse.OnFailer($"{request.Mobile} allready registered.");
 
+            //string publicToken = await tokenProvider.Generate();
             int result = await context.AddAsync(MapDto(request));
             return result > 0 ? ApiResponse.OnSuccess("Redord added successfully.",result) : ApiResponse.OnFailer("Enter details are invalid. Please enter correct details");
         }
@@ -114,7 +115,6 @@ namespace DigiCoupon.Application.Services
                 NickName = request.NickName,
                 Mobile = request.Mobile,
                 MemberCode = $"DG-{RandomNumberGenerator.GetInt32(100000, 999999)}",
-                PublicToken = "https://",
                 IsActive = true
             };
             return Customer;
@@ -122,7 +122,7 @@ namespace DigiCoupon.Application.Services
 
         private CustomerRequestDto MapDto(Customers obj)
         {
-            return new CustomerRequestDto(obj.Id,obj.RestaurantId, obj.RestaurantBranchId, obj.FirstName, obj.LastName, obj.NickName, obj.Mobile,obj.MemberCode);
+            return new CustomerRequestDto(obj.Id,obj.RestaurantId, obj.RestaurantBranchId, obj.FirstName, obj.LastName, obj.NickName, obj.Mobile,obj.MemberCode,obj.PublicToken);
         }
     }
 }
